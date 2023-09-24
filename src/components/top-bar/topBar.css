@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    background: white;
+    padding: 0 20px;
+}
+
+.banner {
+    height: 40px;
+    background-color: black;
+}
+
+.banner-content {
+    color: white;
+    font-size: 16px;
+    padding-top: 10px;
+}
+
+.navbar-content {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.App-logo {
+    height: 70%;
+    width: 150px;
+    mix-blend-mode: darken;
+}
+
+.options-text {
+    color: black;
+}
+
+.options {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: center;
+    order: 2;
+}
