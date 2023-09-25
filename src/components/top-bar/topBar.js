@@ -1,5 +1,6 @@
 import logo from '../../assets/CalendrifyLogo.svg';
 import './topBar.css';
+import { Link } from 'react-router-dom';
 
 function TopBar() {
     return (
@@ -7,13 +8,15 @@ function TopBar() {
         <div className='navbar'>
             <div className='navbar-content'>
                 <div className='logo'>
-                    <img src={logo} className="App-logo" alt="logo" />
+                    <Link to="/home">
+                        <img src={logo} className="App-logo" alt="logo" />
+                    </Link>
                 </div>
                 <div className='options'>
-                    <p className='options-text'>Home</p>
-                    <p className='options-text'>About Us</p>
-                    <p className='options-text'>Contact Us</p>
-                    <p className='options-text'>Log in</p>
+                    <Link to="/home" className='home-label'>Home</Link>
+                    <Link to="/about-us" className='about-label'>About Us</Link>
+                    <Link to="/contact-us" className='contact-label'>Contact Us</Link>
+                    <Link to="/login" className='login-label'>Login</Link>
                 </div>
             </div>
         </div>
