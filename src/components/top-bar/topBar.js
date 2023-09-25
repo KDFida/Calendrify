@@ -1,7 +1,7 @@
 import logo from '../../assets/CalendrifyLogo.svg';
 import './topBar.css';
 
-function topBar() {
+function TopBar() {
     return (
         <>
         <div className='navbar'>
@@ -24,4 +24,4 @@ function topBar() {
     )
 }
 
-export default topBar
+export default TopBar;
