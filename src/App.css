@@ -1,3 +1,8 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 .App {
   min-height: 100vh;
   display: flex;
@@ -5,8 +10,6 @@
   text-align: center;
 }
 
-.App-header {
-  flex-grow: 1;
-  background-color: #F9F9F9;
-  color: black;
+.App-content {
+  flex: 1;
 }

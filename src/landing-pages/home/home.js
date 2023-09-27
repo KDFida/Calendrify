@@ -1,11 +1,11 @@
 import React from "react";
-import TopBar from "../../components/top-bar/topBar";
 
 function Home() {
     return (
         <>
-            <TopBar />
-            <p>Home</p>
+            <div className="home-content">
+                <p>Home</p>
+            </div>
         </>
     )
 }

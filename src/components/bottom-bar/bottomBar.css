@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.bottomBar {
+    background-color: black;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.bottomBar-container {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottomBar-options {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    align-items: center;
+    flex-direction: column;
+    order: 2;
+}
+
+.bottomBar-options a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+.bottomBar-options a:hover {
+    text-decoration: underline;
+    color: #007bFF;
+}
