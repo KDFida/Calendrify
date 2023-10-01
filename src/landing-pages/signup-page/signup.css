@@ -1,35 +1,36 @@
-.login-container {
+.signup-container {
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.login-title {
+.signup-title {
     color: black;
 }
 
-.login-form {
+.signup-form {
     display: flex;
     flex-direction: column;
     width: 300px;
-    padding: 30px 0;
+    padding-top: 30px;
+    padding-bottom: 50px;
 }
 
-.login-form input {
+.signup-form input {
     margin-bottom: 10px;
     padding: 10px;
     border: none;
     border-radius: 10px;
     box-shadow: 0px 0px 15px 4px lightgrey;
-}
+}   
 
-.login-form input:focus {
+.signup-form input:focus {
     box-shadow: 0 0 5px 2px rgb(175, 175, 175);
     outline: none;
 }
 
-.login-form button {
+.signup-form button {
     padding: 10px 20px;
     margin-top: 20px;
     background-color: #147efb;
@@ -38,13 +39,13 @@
     cursor: pointer;
 }
 
-.login-form button:hover {
+.signup-form button:hover {
     background-color: transparent;
     border-color: #147efb;
     transition: all 0.3s ease-in-out;
 }
 
-.create-account {
+.already-registered {
     color: grey;
     align-self: center;
     padding-top: 10px;

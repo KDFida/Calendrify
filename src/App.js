@@ -6,6 +6,7 @@ import ContactUs from './landing-pages/contact-us/ContactUs';
 import Login from './landing-pages/login/Login';
 import TopBar from './components/top-bar/topBar';
 import BottomBar from './components/bottom-bar/bottomBar';
+import Signup from './landing-pages/signup-page/Signup';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
                     <Route path='/about-us' element={<AboutUs />} />
                     <Route path='/contact-us' element={<ContactUs />} />
                     <Route path='/login' element={<Login />} />
+                    <Route path='/create-account' element={<Signup />} />
                 </Routes>
             </div>
             <BottomBar />

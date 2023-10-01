@@ -1,5 +1,6 @@
 import React from "react";
 import './login.css';
+import { Link } from 'react-router-dom'
 
 function Login() {
     return (
@@ -10,6 +11,7 @@ function Login() {
                     <input id="email" type="email" placeholder="Email" />
                     <input id="password" type="password" placeholder="Password" />
                     <button id="submit-button" type="submit">Sign In</button>
+                    <p className="create-account"> Not registered? <Link to="/create-account">Sign Up</Link></p>
                 </form>
             </div>
         </div>
