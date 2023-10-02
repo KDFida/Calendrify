@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './landing-pages/home/home';
 import AboutUs from './landing-pages/about-us/AboutUs';
 import ContactUs from './landing-pages/contact-us/ContactUs';
-import Login from './landing-pages/login/Login';
+import Login from './landing-pages/user-account/login/Login';
 import TopBar from './components/top-bar/topBar';
 import BottomBar from './components/bottom-bar/bottomBar';
-import Signup from './landing-pages/signup-page/Signup';
+import Signup from './landing-pages/user-account/signup-page/Signup';
 
 function App() {
   return (
