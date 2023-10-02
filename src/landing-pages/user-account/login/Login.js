@@ -10,6 +10,7 @@ function Login() {
                 <form className="login-form">
                     <input id="email" type="email" placeholder="Email" />
                     <input id="password" type="password" placeholder="Password" />
+                    <Link className="forgot-password" to="/forgot-password">Forgot Password?</Link>
                     <button id="submit-button" type="submit">Sign In</button>
                     <p className="create-account"> Not registered? <Link to="/create-account">Sign Up</Link></p>
                 </form>
