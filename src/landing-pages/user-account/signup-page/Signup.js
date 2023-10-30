@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import firebase from "../../../firebase/firebase";
 import { setDoc, doc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 function Signup() {
     const [name, setName] = useState("");
@@ -47,6 +48,7 @@ function Signup() {
 
         const passwordCheck = passwordValidation(password, confirmPwd);
         if (passwordCheck !== null) {
+            toast.error(passwordCheck);
             return;
         }
 
@@ -62,10 +64,11 @@ function Signup() {
             });
         })
         .then(() => {
+            toast.success("Account created successfully. Please log in!");
             redirectTo('/login');
         })
         .catch((error) => {
-            
+            toast.error("Something went wrong. Please try again!");
         })
     }
 

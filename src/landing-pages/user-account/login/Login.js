@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './login.css';
 import { Link, useNavigate } from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { toast } from "react-toastify";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -15,9 +16,11 @@ function Login() {
 
         signInWithEmailAndPassword(authentication, email, password)
         .then((userCredentials) => { 
+            toast.success("Successfully Signed in ✅");
             redirectTo('/app/home');
         })
         .catch((error) => {
+            toast.error("Invalid email or password. Please try again!");
         })
     }
 

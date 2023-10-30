@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './forgotPassword.css';
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function ForgotPassword() {
     const [email, setEmail] = useState("");
@@ -12,8 +13,10 @@ function ForgotPassword() {
         e.preventDefault();
         try {
             await sendPasswordResetEmail(authentication, email);
+            toast.success("Reset password email sent ✅");
             redirectTo('/login');
         } catch (error) {
+            toast.error("Something went wrong. Please try again!");
         }
     }
 

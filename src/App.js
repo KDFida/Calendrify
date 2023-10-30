@@ -8,6 +8,7 @@ import TopBar from './components/top-bar/topBar';
 import BottomBar from './components/bottom-bar/bottomBar';
 import Signup from './landing-pages/user-account/signup-page/Signup';
 import ForgotPassword from './landing-pages/user-account/forgot-password/ForgotPassword';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             </div>
             <BottomBar />
         </div>
+        <ToastContainer />
       </Router>
   );
 }

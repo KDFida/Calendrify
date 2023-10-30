@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './contactUs.css';
 import firebase from "../../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 function ContactUs() {
 
@@ -18,8 +19,9 @@ function ContactUs() {
                 email: email,
                 message: message,
             });
-        } catch (e) {
-
+            toast.success("Message has been sent ✅");
+        } catch (error) {
+            toast.error(error.message);
         }
 
         setName("");
