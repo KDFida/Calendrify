@@ -1,37 +1,61 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './landing-pages/home/home';
 import AboutUs from './landing-pages/about-us/AboutUs';
 import ContactUs from './landing-pages/contact-us/ContactUs';
 import Login from './landing-pages/user-account/login/Login';
-import TopBar from './components/top-bar/topBar';
-import BottomBar from './components/bottom-bar/bottomBar';
 import Signup from './landing-pages/user-account/signup-page/Signup';
 import ForgotPassword from './landing-pages/user-account/forgot-password/ForgotPassword';
 import { ToastContainer } from 'react-toastify';
+import AppHome from './main-app/home/Home';
+import BottomBar from './components/bottom-bar/bottomBar';
+import TopBar from './components/top-bar/topBar';
 
-function App() {
+function AppLayout({children}) {
   return (
-      <Router>
-        <div className='App'>
-            <TopBar />
-            <div className='App-content'>
-                <Routes>
-                    <Route path='/' element={<Home />} />
-                    <Route path='/home' element={<Home />} />
-                    <Route path='/about-us' element={<AboutUs />} />
-                    <Route path='/contact-us' element={<ContactUs />} />
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/create-account' element={<Signup />} />
-                    <Route path='/forgot-password' element={<ForgotPassword />} />
-                </Routes>
-            </div>
-            <BottomBar />
-        </div>
-        <ToastContainer />
-      </Router>
+    <div className="AppLayout">
+      <div className="AppMainContent">
+        {children}
+      </div>
+    </div>
   );
 }
 
+function AppContent() {
+  const pagesToShow = ["/", "/home", "/about-us", "/contact-us", "/login", "/create-account", "/forgot-password"].includes(useLocation().pathname);
+  return (
+    <div className="App">
+    {pagesToShow && <TopBar /> }
+    <header className="App-content">
+      <Routes>
+      <Route path='/' element={<Home />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/about-us' element={<AboutUs />} />
+        <Route path='/contact-us' element={<ContactUs />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/create-account' element={<Signup />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path="/app/home" element={
+          <AppLayout>
+            <AppHome />
+          </AppLayout>
+        } />
+        
+
+      </Routes>
+    </header>
+    { pagesToShow && <BottomBar /> }
+    <ToastContainer />
+  </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
 
 export default App;
