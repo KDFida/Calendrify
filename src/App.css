@@ -14,4 +14,6 @@ html, body {
 
 .App-content {
   flex-grow: 1;
+  background-color: #F9F9F9;
+  color: black;
 }
