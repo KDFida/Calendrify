@@ -1,0 +1,51 @@
+.sidebar {
+    background: #09043D;  
+    width: 70px;  
+    height: 100vh; 
+    position: fixed; 
+}
+  
+.user-account-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.sidebar-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.sidebar-icon {
+  margin-top: 30px; 
+  width: 40px;
+  height: 40px;
+  color: #F6F3E4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-icon.active {
+  background: #FFBD59;
+  border-radius: 50%;
+}
+
+.settings-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.logout-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 10px;
+}
