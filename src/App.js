@@ -8,6 +8,10 @@ import Signup from './landing-pages/user-account/signup-page/Signup';
 import ForgotPassword from './landing-pages/user-account/forgot-password/ForgotPassword';
 import { ToastContainer } from 'react-toastify';
 import AppHome from './main-app/home/Home';
+import AppCalendar from './main-app/calendar/Calendar';
+import TaskTracking from './main-app/task-tracking/TaskTracking';
+import Tasks from './main-app/tasks/Tasks';
+import Notes from './main-app/notes/Notes';
 import BottomBar from './components/bottom-bar/bottomBar';
 import TopBar from './components/top-bar/topBar';
 
@@ -40,7 +44,26 @@ function AppContent() {
             <AppHome />
           </AppLayout>
         } />
-        
+        <Route path="/app/calendar" element={
+          <AppLayout>
+            <AppCalendar />
+          </AppLayout>
+        } />
+        <Route path="/app/tasks" element={
+          <AppLayout>
+            <Tasks />
+          </AppLayout>
+        } />      
+        <Route path="/app/task-tracking" element={
+          <AppLayout>
+            <TaskTracking />
+          </AppLayout>
+        } /> 
+        <Route path="/app/notes" element={
+          <AppLayout>
+            <Notes />
+          </AppLayout>
+        } />
 
       </Routes>
     </header>
