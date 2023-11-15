@@ -11,7 +11,7 @@ function Sidebar() {
     return (
         <div className="sidebar">
         <div className='user-account-icon'>
-            <NavLink to="/app/user-profile" className="account-icon">
+            <NavLink to="/app/account" className="account-icon">
             <FaRegUserCircle 
                 size={32}
                 color='#F6F3E4'/>

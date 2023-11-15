@@ -12,6 +12,8 @@ import AppCalendar from './main-app/calendar/Calendar';
 import TaskTracking from './main-app/task-tracking/TaskTracking';
 import Tasks from './main-app/tasks/Tasks';
 import Notes from './main-app/notes/Notes';
+import Account from './main-app/account/Account';
+import Settings from './main-app/settings/Settings';
 import BottomBar from './components/bottom-bar/bottomBar';
 import TopBar from './components/top-bar/topBar';
 
@@ -62,6 +64,16 @@ function AppContent() {
         <Route path="/app/notes" element={
           <AppLayout>
             <Notes />
+          </AppLayout>
+        } />
+        <Route path="/app/account" element={
+          <AppLayout>
+            <Account />
+          </AppLayout>
+        } />
+        <Route path="/app/settings" element={
+          <AppLayout>
+            <Settings />
           </AppLayout>
         } />
 
