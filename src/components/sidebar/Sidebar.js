@@ -1,13 +1,25 @@
 import React from 'react';
 import './sidebar.css'; 
+import firebase from '../../firebase/firebase';
 import { NavLink } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
 import { BiSolidCalendar, BiSolidTimer } from 'react-icons/bi';
 import { FaTasks, FaStickyNote, FaRegUserCircle } from 'react-icons/fa';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { IoIosSettings } from 'react-icons/io';
+import { toast } from 'react-toastify';
 
 function Sidebar() {
+    const logoutClicked = () => {
+        firebase.authentication.signOut()
+        .then(() => {
+          toast.success("Logged out! ✅");
+        })
+        .catch(() => {
+          toast.error("Something went wrong, please try again!");
+        })
+    }
+
     return (
         <div className="sidebar">
         <div className='user-account-icon'>
@@ -33,8 +45,8 @@ function Sidebar() {
                 color='#F6F3E4'/>
             </NavLink>
         </div>
-        <div className='logout-icon'>
-            <NavLink to="/app/logout" className="logout-icon">
+        <div className='logout-icon' onClick={ logoutClicked }>
+            <NavLink to="/home" className="logout-icon">
             <HiOutlineLogout 
                 size={32}
                 color='#F6F3E4'/>
