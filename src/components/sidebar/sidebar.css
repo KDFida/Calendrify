@@ -12,10 +12,12 @@
     margin-top: 50px;
 }
 
-.sidebar-container{
+.sidebar-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: center; 
   justify-content: center;
+  height: calc(70vh - 30px - 50px);
   margin-top: 60px;
 }
 
@@ -48,4 +50,9 @@
   justify-content: center;
   flex-direction: column;
   margin-top: 10px;
+}
+
+.activePage {
+  background: #FFBD59;
+  border-radius: 50%;
 }
