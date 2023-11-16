@@ -1,31 +1,30 @@
 .sidebar {
-    background: #09043D;  
-    width: 70px;  
-    height: 100vh; 
-    position: fixed; 
+  background: #09043D;  
+  width: 70px;  
+  height: 100vh; 
+  position: fixed; 
 }
-  
+
 .user-account-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 40px;  
 }
 
 .sidebar-container {
   display: flex;
-  flex-direction: column;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
-  height: calc(70vh - 30px - 50px);
   margin-top: 60px;
+  margin-top: 70px;
 }
 
 .sidebar-icon {
   margin-top: 30px; 
   width: 40px;
   height: 40px;
-  color: #F6F3E4;
+  color: #e1e5ee;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,7 +51,52 @@
   margin-top: 10px;
 }
 
-.activePage {
-  background: #FFBD59;
-  border-radius: 50%;
+.sidebar-hamburgerMenu {
+  position: absolute;
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    background: transparent;
+  }
+
+  .sidebar-container {
+    background: #09043D;
+    border-radius: 10px;
+    margin-left: 5px;
+  }
+
+  .navlinks-active {
+    display: none;
+  }
+
+  .navlinks-active.active {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-hamburgerMenu {
+    display: block;
+    top: 40px;
+    left: 30px;
+  }
+
+  .user-account-icon {
+    margin-top: 10px;
+    padding-bottom: 0px;
+  }
+
+  .sidebar-icon {
+    margin-top: 10px;
+  }
+
+  .settings-icon {
+    margin-top: 10px;
+  }
+
+  .logout-icon {
+    margin-top: 10px;
+    padding-bottom: 10px;
+  }
 }

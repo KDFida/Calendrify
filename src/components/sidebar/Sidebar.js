@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './sidebar.css'; 
 import firebase from '../../firebase/firebase';
 import { NavLink } from 'react-router-dom';
@@ -7,9 +7,33 @@ import { BiSolidCalendar, BiSolidTimer } from 'react-icons/bi';
 import { FaTasks, FaStickyNote, FaRegUserCircle } from 'react-icons/fa';
 import { HiOutlineLogout } from 'react-icons/hi';
 import { IoIosSettings } from 'react-icons/io';
+import { GrClose } from 'react-icons/gr';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import { toast } from 'react-toastify';
 
 function Sidebar() {
+    const [showMenu, setMenu] = useState(false);
+
+    useEffect(() => {
+      const resize = () => {
+        if (window.innerWidth > 768) {
+          setMenu(false);
+        }
+      };
+  
+      window.addEventListener('resize', resize);
+  
+      return () => {
+        window.removeEventListener('resize', resize);
+      };
+    }, []);
+  
+    const clicked = () => {
+      if (window.innerWidth <= 768) {
+        setMenu(!showMenu);
+      }
+    }
+
     const logoutClicked = () => {
         firebase.authentication.signOut()
         .then(() => {
@@ -22,36 +46,39 @@ function Sidebar() {
 
     return (
         <div className="sidebar">
-        <div className='user-account-icon'>
-            <NavLink to="/app/account" className="account-icon">
-            <FaRegUserCircle 
-                size={32}
-                color='#F6F3E4'/>
-            </NavLink>
-        </div>
-        <div className='sidebar-container'>
-            <div className='navlinks-active'>
-                <NavLink to="/app/home" className="sidebar-icon" activeClassName="activePage"><AiFillHome size={24}/></NavLink>
-                <NavLink to="/app/calendar" className="sidebar-icon" activeClassName="activePage"><BiSolidCalendar size={24}/></NavLink>
-                <NavLink to="/app/tasks" className="sidebar-icon" activeClassName="activePage"><FaTasks size={24}/></NavLink>
-                <NavLink to="/app/task-tracking" className="sidebar-icon" activeClassName="activePage"><BiSolidTimer size={30}/></NavLink>
-                <NavLink to="/app/notes" className="sidebar-icon" activeClassName="activePage"><FaStickyNote size={24}/></NavLink>
+            <div className='sidebar-container'>
+                <div className={`navlinks-active${showMenu ? 'active' : ''}`}>
+                    <div className='user-account-icon' onClick={ clicked }>
+                        <NavLink to="/app/account" className="account-icon">
+                        <FaRegUserCircle 
+                            size={32}
+                            color='#F6F3E4'/>
+                        </NavLink>
+                    </div>
+                        <NavLink to="/app/home" className="sidebar-icon" activeClassName="activePage" onClick={ clicked }><AiFillHome size={24}/></NavLink>
+                        <NavLink to="/app/calendar" className="sidebar-icon" activeClassName="activePage" onClick={ clicked }><BiSolidCalendar size={24}/></NavLink>
+                        <NavLink to="/app/tasks" className="sidebar-icon" activeClassName="activePage" onClick={ clicked }><FaTasks size={24}/></NavLink>
+                        <NavLink to="/app/task-tracking" className="sidebar-icon" activeClassName="activePage" onClick={ clicked }><BiSolidTimer size={30}/></NavLink>
+                        <NavLink to="/app/notes" className="sidebar-icon" activeClassName="activePage" onClick={ clicked }><FaStickyNote size={24}/></NavLink>
+                    <div className='settings-icon' onClick={ clicked }>
+                        <NavLink to="/app/settings" className="settings-icon">
+                        <IoIosSettings 
+                            size={36}
+                            color='#F6F3E4'/>
+                        </NavLink>
+                    </div>
+                    <div className='logout-icon' onClick={ logoutClicked }>
+                        <NavLink to="/home" className="logout-icon">
+                        <HiOutlineLogout 
+                            size={32}
+                            color='#F6F3E4'/>
+                        </NavLink>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div className='settings-icon'>
-            <NavLink to="/app/settings" className="settings-icon">
-            <IoIosSettings 
-                size={36}
-                color='#F6F3E4'/>
-            </NavLink>
-        </div>
-        <div className='logout-icon' onClick={ logoutClicked }>
-            <NavLink to="/home" className="logout-icon">
-            <HiOutlineLogout 
-                size={32}
-                color='#F6F3E4'/>
-            </NavLink>
-        </div>
+            <div className="sidebar-hamburgerMenu" onClick={clicked}>
+                {showMenu ?<GrClose size={24}/> : <GiHamburgerMenu size={30}/>}
+            </div>
         </div>
     )
 }
