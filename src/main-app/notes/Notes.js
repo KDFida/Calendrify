@@ -4,8 +4,9 @@ import Sidebar from "../../components/sidebar/Sidebar";
 
 function Notes() {
     return (
-        <div>
+        <div className="notes">
             <Sidebar />
+            <button className="add-note-button">Add New Note</button>
         </div>
     )
 }
