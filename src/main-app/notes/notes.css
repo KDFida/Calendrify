@@ -1,14 +1,42 @@
 .add-note-button {
-    position: absolute;
-    top: 20px;
-    right: 20px; 
     padding: 10px;
     color: white;
-    background-color: #09043d;
-    border-radius: 15px;
+    background-color: #09043D;
+    border-radius: 100%;
     font-size: 14px;
-    width: 140px;
+    width: 45px;
     height: 45px;
     border: none;
-    cursor: pointer; 
+    cursor: pointer;
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    overflow: hidden; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, width 0.3s, height 0.3s, border-radius 0.3s;
+}
+
+.newNote-icon, .button-text {
+    position: absolute;
+    transition: opacity 0.3s;
+}
+
+.button-text {
+    opacity: 0;
+}
+
+.add-note-button:hover {
+    border-radius: 15px;
+    width: 140px;
+    height: 45px;
+}
+
+.add-note-button:hover .newNote-icon {
+    opacity: 0; 
+}
+
+.add-note-button:hover .button-text {
+    opacity: 1;
 }
