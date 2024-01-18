@@ -40,3 +40,10 @@
 .add-note-button:hover .button-text {
     opacity: 1;
 }
+
+@media (max-width: 768px) {
+    .add-note-button {
+        top: 35px; 
+        right: 20px; 
+    }
+}
