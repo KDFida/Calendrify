@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './newNote.css';
 import firebase from "../../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
@@ -44,6 +45,8 @@ function NewNote() {
     return (
         <div className="newNote">
             <Sidebar/>
+            <div className="newNote-container">
+
             <h2>Create a New Note</h2>
             <div>
                 <input
@@ -60,8 +63,10 @@ function NewNote() {
                     onChange={handleContentChange}
                 />
             </div>
-            <button onClick={saveNote}>Save</button>
+            
             <button onClick={deleteNote}>Delete</button>
+            <button onClick={saveNote}>Save</button>
+            </div>
         </div>
     );
 }
