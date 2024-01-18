@@ -35,18 +35,30 @@ function Notes() {
     return (
         <div className="notes">
             <Sidebar />
-            <button className="add-note-button" onClick={goToNewNotePage}>
-                <FaPlus className="newNote-icon"></FaPlus>
-                <span className="button-text">Add New Note</span>
-            </button>
+            <div className="title">
+                <h1>Notes</h1>
+            </div>
+            <div className="notes-content">
+                <div className="notes-header">
+                    <button className="add-note-button" onClick={goToNewNotePage}>
+                        <FaPlus className="newNote-icon"></FaPlus>
+                        <span className="button-text">Add New Note</span>
+                    </button>
+                </div>
 
-            {/* {notes.length ? (
-                notes.map(note => (
-
-                ))
-            ) : (
-                <p>No notes yet! Create one now!</p>
-            )} */}
+                <div className="notes-grid">
+                    {notes.length > 0 ? (
+                        notes.map(note => (
+                            <div key={note.id} className="note-card">
+                                <h2 className="note-title">{note.title}</h2>
+                                <p className="note-content">{note.content}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="no-notes">No notes yet! Create one now!</p>
+                    )}
+                </div>
+            </div>
         </div>
     )
 }
