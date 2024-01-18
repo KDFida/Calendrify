@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import './notes.css';
 import { useNavigate } from "react-router-dom";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import firebase from "../../firebase/firebase";
 import { FaPlus } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import Sidebar from "../../components/sidebar/Sidebar";
+import { toast } from "react-toastify";
 
 function Notes() {
 
@@ -32,6 +34,20 @@ function Notes() {
             })
     }
 
+    function deleteNote(noteId) {
+        const { database } = firebase;
+        const noteRef = doc(database, "notes", noteId);
+      
+        deleteDoc(noteRef)
+          .then(() => {
+            toast.success("Note Deleted Successfully");
+            setNotes(prevNotes => prevNotes.filter(note => note.id !== noteId));
+          })
+          .catch(error => {
+            toast.error("Error Deleting Document: ", error);
+          });
+      }
+
     return (
         <div className="notes">
             <Sidebar />
@@ -52,6 +68,11 @@ function Notes() {
                             <div key={note.id} className="note-card">
                                 <h2 className="note-title">{note.title}</h2>
                                 <p className="note-content">{note.content}</p>
+                                <button onClick={() => deleteNote(note.id)}>
+                                    <MdDelete
+                                        size={18}
+                                    />
+                                </button>
                             </div>
                         ))
                     ) : (
