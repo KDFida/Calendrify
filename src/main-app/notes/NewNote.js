@@ -4,6 +4,7 @@ import firebase from "../../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 import Sidebar from "../../components/sidebar/Sidebar";
+import { toast } from "react-toastify";
 
 function NewNote() {
     const [title, setTitle] = useState("");
@@ -21,15 +22,21 @@ function NewNote() {
 
     const saveNote = async () => {
         if(title && content) {
-            try {
-                const docRef = await addDoc(collection(firebase.database, "notes"), {
-                    title: title,
-                    content: content
-                });
-                console.log("Note added with ID: ", docRef.id);
-                navigate("/app/notes");
-            } catch (error) {
-                console.error("Error adding document: ", error);
+            const user = firebase.authentication.currentUser;
+            if (user) {
+                try {
+                    const docRef = await addDoc(collection(firebase.database, "notes"), {
+                        title: title,
+                        content: content,
+                        userId: user.uid
+                    });
+                    console.log("Note added with ID: ", docRef.id);
+                    navigate("/app/notes");
+                } catch (error) {
+                    console.error("Error adding document: ", error);
+                }
+            } else {
+                toast.info("Please log in to save a note");
             }
         } else {
             alert("Both title and content are required!");
