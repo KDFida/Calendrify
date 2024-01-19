@@ -82,7 +82,7 @@ function Notes() {
                                 <h2 className="note-title">{note.title}</h2>
                                 <p className="note-content">{note.content}</p>
                                 <div className="icons">
-                                    <button className="edit-icon">
+                                    <button className="edit-icon" onClick={() => navigate(`/app/notes/edit/${note.id}`)}>
                                         <MdModeEdit
                                             size={18}
                                         />
