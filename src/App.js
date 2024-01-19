@@ -13,6 +13,7 @@ import TaskTracking from './main-app/task-tracking/TaskTracking';
 import Tasks from './main-app/tasks/Tasks';
 import Notes from './main-app/notes/Notes';
 import NewNote from './main-app/notes/NewNote';
+import EditNote from './main-app/notes/EditNote';
 import Account from './main-app/account/Account';
 import Settings from './main-app/settings/Settings';
 import BottomBar from './components/bottom-bar/bottomBar';
@@ -81,6 +82,12 @@ function AppContent() {
         <Route path="/app/notes/new-note" element={
           <AppLayout>
             <NewNote />
+          </AppLayout>
+        } />
+
+        <Route path="/app/notes/edit/:noteId" element={
+          <AppLayout>
+            <EditNote />
           </AppLayout>
         } />
 

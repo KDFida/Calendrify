@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getDocs, collection, deleteDoc, doc, where } from "firebase/firestore";
 import firebase from "../../firebase/firebase";
 import { FaPlus } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdModeEdit } from "react-icons/md";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { toast } from "react-toastify";
 
@@ -81,11 +81,18 @@ function Notes() {
                             <div key={note.id} className="note-card">
                                 <h2 className="note-title">{note.title}</h2>
                                 <p className="note-content">{note.content}</p>
-                                <button onClick={() => deleteNote(note.id)}>
-                                    <MdDelete
-                                        size={18}
-                                    />
-                                </button>
+                                <div className="icons">
+                                    <button className="edit-icon" onClick={() => navigate(`/app/notes/edit/${note.id}`)}>
+                                        <MdModeEdit
+                                            size={18}
+                                        />
+                                    </button>
+                                    <button className="delete-icon" onClick={() => deleteNote(note.id)}>
+                                        <MdDelete
+                                            size={18}
+                                        />
+                                    </button>
+                                </div>
                             </div>
                         ))
                     ) : (
