@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './notes.css';
 import { useNavigate } from "react-router-dom";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc, where } from "firebase/firestore";
 import firebase from "../../firebase/firebase";
 import { FaPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
@@ -23,16 +23,29 @@ function Notes() {
 
     function fetchNotes() {
         const { database } = firebase;
-
-        getDocs(collection(database, "notes"))
-            .then((querySnapshot) => {
-                const notesArray = querySnapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-                setNotes(notesArray);
-            })
-    }
+        const user = firebase.authentication.currentUser;
+    
+        if (user) {
+            getDocs(collection(database, "notes"), where("userId", "==", user.uid))
+                .then((querySnapshot) => {
+                    const notesArray = querySnapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+                    
+                    const userNotes = notesArray.filter(note => note.userId === user.uid);
+                    setNotes(userNotes);
+                })
+                .catch(error => {
+                    console.error("Error fetching notes: ", error);
+                    toast.error("Error fetching notes");
+                });
+        } else {
+            
+            toast.info("Please log in to see your notes");
+            setNotes([]); 
+        }
+    }    
 
     function deleteNote(noteId) {
         const { database } = firebase;
