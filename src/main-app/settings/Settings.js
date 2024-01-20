@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './settings.css';
-import { getAuth, updatePassword } from "firebase/auth";
+import { getAuth, updatePassword, deleteUser } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Sidebar from "../../components/sidebar/Sidebar";
@@ -20,6 +20,21 @@ function Settings() {
           toast.error("Error updating password");
         });
     };
+
+    const handleDeleteAccount = () => {
+        if (window.confirm('Are you sure you want to delete your account? This cannot be undone.')) {
+            const auth = getAuth();
+            const user = auth.currentUser;
+          
+            deleteUser(user).then(() => {
+                toast.success("Account deleted successfully");
+                navigate('/home');
+            }).catch((error) => {
+                toast.error("Error deleting account: " + error.message);
+            });
+        }
+    };
+
     
     return (
         <div className="settings">
@@ -37,8 +52,14 @@ function Settings() {
                         <button type="submit">Update Password</button>
                     </form>
                 </div>
+
+                <div className="settings-card">
+                    <h2>Delete Account</h2>
+                    <button onClick={handleDeleteAccount}>Delete My Account</button>
+                </div>
+
             </div>
-    </div>
+        </div>
     )
 }
 
