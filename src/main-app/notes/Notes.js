@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './notes.css';
 import { useNavigate } from "react-router-dom";
-import { getDocs, collection, deleteDoc, doc, where } from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc, query, where } from "firebase/firestore";
 import firebase from "../../firebase/firebase";
 import { FaPlus } from "react-icons/fa";
 import { MdDelete, MdModeEdit } from "react-icons/md";
@@ -18,34 +18,33 @@ function Notes() {
     }
 
     useEffect(() => {
-        fetchNotes();
-    }, []);
-
-    function fetchNotes() {
-        const { database } = firebase;
-        const user = firebase.authentication.currentUser;
-    
-        if (user) {
-            getDocs(collection(database, "notes"), where("userId", "==", user.uid))
-                .then((querySnapshot) => {
-                    const notesArray = querySnapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        ...doc.data()
-                    }));
-                    
-                    const userNotes = notesArray.filter(note => note.userId === user.uid);
-                    setNotes(userNotes);
-                })
-                .catch(error => {
-                    console.error("Error fetching notes: ", error);
-                    toast.error("Error fetching notes");
-                });
-        } else {
-            
+        const unsubscribe = firebase.authentication.onAuthStateChanged(user => {
+          if (user) {
+            fetchNotes(user.uid); 
+          } else {
             toast.info("Please log in to see your notes");
             setNotes([]); 
-        }
-    }    
+          }
+        });
+   
+        return () => unsubscribe();
+      }, []); 
+
+      function fetchNotes(userId) {
+        const { database } = firebase;
+        getDocs(query(collection(database, "notes"), where("userId", "==", userId)))
+          .then((querySnapshot) => {
+            const notesArray = querySnapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data()
+            }));
+            setNotes(notesArray);
+          })
+          .catch(error => {
+            console.error("Error fetching notes: ", error);
+            toast.error("Error fetching notes");
+          });
+      }   
 
     function deleteNote(noteId) {
         const { database } = firebase;
