@@ -1,0 +1,78 @@
+.top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px; 
+}
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.availabilityButton,
+.regenerateButton {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #09043d;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    margin-top: 10px;
+    min-width: 150px;
+    max-height: 40px;
+}
+
+.addTaskButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+.availabilityButton:hover,
+.regenerateButton:hover {
+    background-color: #09043d; 
+}
+
+.addTaskButton:hover {
+    background: none;
+}
+
+@media (max-width: 768px) {
+    .calendar {
+        margin-left: 0;
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .title {
+        justify-content: center;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .buttons {
+        width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .availabilityButton,
+    .regenerateButton {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
