@@ -55,10 +55,6 @@
         padding: 0 15px;
     }
 
-    .title {
-        justify-content: center;
-    }
-
     .top-bar {
         flex-direction: column;
         align-items: flex-start;
@@ -73,6 +69,5 @@
     .availabilityButton,
     .regenerateButton {
         width: 100%;
-        margin-bottom: 10px;
     }
 }
