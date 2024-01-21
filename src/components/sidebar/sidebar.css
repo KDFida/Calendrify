@@ -59,6 +59,7 @@
 @media screen and (max-width: 768px) {
   .sidebar {
     background: transparent;
+    z-index: 1000;
   }
 
   .sidebar-container {
