@@ -37,10 +37,11 @@ function Settings() {
 
     
     return (
-        <div className="settings">
+        <div className="layout">
             <Sidebar />
-            <div className="settings-container">
-                <div>
+            <div className="settings">
+                <h1>Settings</h1>
+                <div className="settings-container">
                     <h2>Change Password</h2>
                     <form onSubmit={handleChangePassword}>
                         <input
@@ -51,12 +52,13 @@ function Settings() {
                         />
                         <button type="submit">Update Password</button>
                     </form>
+
+                    <div className="delete">
+                        <h2>Delete Account</h2>
+                        <button onClick={handleDeleteAccount}>Delete My Account</button>
+                    </div>
                 </div>
 
-                <div className="settings-card">
-                    <h2>Delete Account</h2>
-                    <button onClick={handleDeleteAccount}>Delete My Account</button>
-                </div>
 
             </div>
         </div>
