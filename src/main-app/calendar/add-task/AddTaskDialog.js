@@ -41,7 +41,7 @@ function AddTaskDialog({ open, onClose }) {
                 userId: user.uid
             });
             toast.success("Task added successfully!");
-            onClose();
+            onClose(); 
         } catch (e) {
             toast.error("Error adding task");
         }
