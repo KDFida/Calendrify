@@ -42,6 +42,7 @@ function AddTaskDialog({ open, onClose }) {
             });
             toast.success("Task added successfully!");
             onClose(); 
+            window.location.reload();
         } catch (e) {
             toast.error("Error adding task");
         }
