@@ -6,6 +6,7 @@ import '@fullcalendar/daygrid';
 import Sidebar from "../../components/sidebar/Sidebar";
 import { AiFillPlusCircle } from "react-icons/ai";
 import AddTaskDialog from "./add-task/AddTaskDialog";
+import AvailabilityDialog from "./availability/AvailabilityDialog";
 import firebase from "../../firebase/firebase";
 import { collection, query, where, getDocs } from "@firebase/firestore";
 import { toast } from "react-toastify";
@@ -13,6 +14,7 @@ import { toast } from "react-toastify";
 function Calendar() {
     const [tasks, setTasks] = useState([]);
     const [isDialogOpen, setDialogOpen] = useState(false);
+    const [isAvailabilityDialogOpen, setAvailabilityDialogOpen] = useState(false);
 
     const handleAddTask = () => {
       setDialogOpen(true);
@@ -20,6 +22,14 @@ function Calendar() {
   
     const handleCloseDialog = () => {
       setDialogOpen(false);
+    };
+
+    const handleAddAvailability = () => {
+        setAvailabilityDialogOpen(true);
+    };
+
+    const handleCloseAddAvailability = () => {
+        setAvailabilityDialogOpen(false);
     };
 
     useEffect(() => {
@@ -33,7 +43,7 @@ function Calendar() {
         });
    
         return () => unsubscribe();
-      }, []); 
+    }, []); 
 
       function fetchTasks(userId) {
         const { database } = firebase;
@@ -59,7 +69,7 @@ function Calendar() {
                 <div className="top-bar">
                     <p className="calendar-title">Calendar</p>
                     <div className="buttons">
-                        <button className="availabilityButton">Set Availability</button>
+                        <button className="availabilityButton" onClick={handleAddAvailability}>Set Availability</button>
                         <button className="regenerateButton">New timetable</button>
                         <button className="addTaskButton" onClick={handleAddTask}>                        
                             <AiFillPlusCircle size={40} color="#09043d" />
@@ -84,6 +94,7 @@ function Calendar() {
                 </div>
             </div>
             <AddTaskDialog open={isDialogOpen} onClose={handleCloseDialog}/>
+            <AvailabilityDialog open={isAvailabilityDialogOpen} onClose={handleCloseAddAvailability} />
         </div>
     )
 }
