@@ -74,6 +74,7 @@ function Calendar() {
                         initialView="dayGridMonth"
                         weekends={true}
                         events={tasks}
+                        dayMaxEventRows={true}
                         headerToolbar={{
                             left: 'prev,next,today',
                             center: 'title',
