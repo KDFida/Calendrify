@@ -17,11 +17,12 @@ function AddTaskDialog({ open, onClose }) {
   const [taskName, setTaskName] = useState('');
   const [taskPriority, setPriority] = useState('');
   const [taskStatus, setStatus] = useState('');
+  const [estimatedHours, setEstimatedHours] = useState('');
   const [taskDeadline, setDeadline] = useState('');
   const [error, setError] = useState('');
 
   const handleSave = () => {
-    if (!taskName || !taskPriority || !taskDeadline) {
+    if (!taskName || !taskPriority || isNaN(estimatedHours) || !taskDeadline) {
       setError('Please fill in all fields.');
       return;
     }
@@ -37,6 +38,7 @@ function AddTaskDialog({ open, onClose }) {
                 name: taskName,
                 priority: taskPriority,
                 status: taskStatus,
+                estimatedHours: parseFloat(estimatedHours),
                 deadline: taskDeadline,
                 userId: user.uid
             });
@@ -104,6 +106,23 @@ function AddTaskDialog({ open, onClose }) {
           onChange={(e) => setDeadline(e.target.value)}
           InputLabelProps={{
             shrink: true,
+          }}
+        />
+
+        <TextField
+          margin="dense"
+          label="Estimated Hours to Complete"
+          type="number"
+          fullWidth
+          value={estimatedHours}
+          onChange={(e) => setEstimatedHours(e.target.value)}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          inputProps={{
+            min: 0,
+            max: 100,
+            step: 0.5
           }}
         />
       </DialogContent>
