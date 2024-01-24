@@ -7,14 +7,18 @@
 
 .AvailabilityDialog .day-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     margin-top: 20px;
 }
 
-.AvailabilityDialog label {
-    margin-right: 10px;
-    font-weight: bold;
+.AvailabilityDialog .MuiTextField-root {
+    margin-bottom: 10px; 
+}
+
+.AvailabilityDialog .MuiInputLabel-root {
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
 }
 
 .AvailabilityDialog input[type="time"] {
