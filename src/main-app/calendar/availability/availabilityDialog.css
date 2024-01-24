@@ -1,0 +1,59 @@
+.AvailabilityDialog {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: auto;
+}
+
+.AvailabilityDialog .day-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.AvailabilityDialog .MuiTextField-root {
+    margin-bottom: 10px; 
+}
+
+.AvailabilityDialog .MuiInputLabel-root {
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.AvailabilityDialog input[type="time"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.AvailabilityDialog .DialogActions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}
+
+.AvailabilityDialog button {
+    margin-left: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.AvailabilityDialog button:hover {
+    background-color: #0056b3;
+}
+
+.AvailabilityDialog button:first-of-type {
+    background-color: #dc3545;
+}
+
+.AvailabilityDialog button:first-of-type:hover {
+    background-color: #bd2130;
+}
