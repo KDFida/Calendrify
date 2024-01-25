@@ -5,14 +5,24 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import AddTaskDialog from "../components/add-task/AddTaskDialog";
 import firebase from "../../firebase/firebase";
 import { toast } from "react-toastify";
-import { getDocs, query, collection, where } from "@firebase/firestore";
+import { getDocs, query, collection, where, updateDoc,deleteDoc, doc } from "@firebase/firestore";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import '@fullcalendar/daygrid';
+import ManageTasksDialog from "../components/manage-task/ManageTasksDialog";
 
 function Tasks() {
     const [isDialogOpen, setDialogOpen] = useState(false);
     const [tasks, setTasks] = useState([]);
+    const [isManageDialogOpen, setManageDialogOpen] = useState(false);
+
+    const handleManageTasks = () => {
+    setManageDialogOpen(true);
+    };
+
+    const handleCloseManageDialog = () => {
+    setManageDialogOpen(false);
+    };
 
     const handleAddTask = () => {
         setDialogOpen(true);
@@ -20,6 +30,48 @@ function Tasks() {
     
     const handleCloseDialog = () => {
     setDialogOpen(false);
+    };
+
+    const handleEditTask = async (task) => {
+        // Define what fields you want to update, for example:
+        const updatedFields = {
+            status: 'In Progress', // this should be dynamic based on user input
+            // ... other fields to update
+        };
+    
+        const { database } = firebase;
+        const taskRef = doc(database, "tasks", task.id);
+    
+        try {
+            await updateDoc(taskRef, updatedFields);
+            toast.success("Task updated successfully");
+    
+            // Update local state
+            setTasks(prevTasks =>
+                prevTasks.map(t => 
+                    t.id === task.id ? { ...t, ...updatedFields } : t
+                )
+            );
+        } catch (error) {
+            toast.error(`Error updating task: ${error.message}`);
+        }
+    };
+    
+      
+    const handleDeleteTask = async (taskId) => {
+        if (window.confirm('Are you sure you want to delete this task?')) {
+            const { database } = firebase;
+            const taskRef = doc(database, "tasks", taskId);
+            
+            try {
+                await deleteDoc(taskRef);
+                toast.success("Task deleted successfully");
+                // Update local state to remove the deleted task
+                setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
+            } catch (error) {
+                toast.error(`Error deleting task: ${error.message}`);
+            }
+        }
     };
 
     useEffect(() => {
@@ -59,6 +111,9 @@ function Tasks() {
                 <div className="top-bar">
                     <p className="task-title">Tasks - Deadlines</p>
                     <div className="buttons">
+                        <button className="manageTasksButton" onClick={handleManageTasks}>
+                            Manage Tasks
+                        </button>
                         <button className="addTaskButton" onClick={handleAddTask}>                        
                             <AiFillPlusCircle size={40} color="#09043d" />
                         </button>
@@ -80,6 +135,13 @@ function Tasks() {
                     />
                 </div>
                 <AddTaskDialog open={isDialogOpen} onClose={handleCloseDialog}/>
+                <ManageTasksDialog
+                    open={isManageDialogOpen}
+                    onClose={handleCloseManageDialog}
+                    tasks={tasks}
+                    onEdit={handleEditTask}
+                    onDelete={handleDeleteTask}
+                />
             </div>
         </div>
     )
