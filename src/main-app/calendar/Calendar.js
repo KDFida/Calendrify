@@ -5,7 +5,7 @@ import './calendar.css';
 import '@fullcalendar/daygrid';
 import Sidebar from "../../components/sidebar/Sidebar";
 import { AiFillPlusCircle } from "react-icons/ai";
-import AddTaskDialog from "./add-task/AddTaskDialog";
+import AddTaskDialog from "../components/add-task/AddTaskDialog";
 import AvailabilityDialog from "./availability/AvailabilityDialog";
 import firebase from "../../firebase/firebase";
 import { collection, query, where, getDocs } from "@firebase/firestore";
