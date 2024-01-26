@@ -51,7 +51,6 @@ function Tasks() {
         const unsubscribe = firebase.authentication.onAuthStateChanged(user => {
           if (user) {
             fetchTasks(user.uid); 
-            console.log(tasks);
           } else {
             toast.info("Please log in to see the page");
             setTasks([]); 
