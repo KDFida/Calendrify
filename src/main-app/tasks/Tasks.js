@@ -5,7 +5,7 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import AddTaskDialog from "../components/add-task/AddTaskDialog";
 import firebase from "../../firebase/firebase";
 import { toast } from "react-toastify";
-import { getDocs, query, collection, where, updateDoc,deleteDoc, doc } from "@firebase/firestore";
+import { getDocs, query, collection, where, deleteDoc, doc } from "@firebase/firestore";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import '@fullcalendar/daygrid';
@@ -31,32 +31,6 @@ function Tasks() {
     const handleCloseDialog = () => {
     setDialogOpen(false);
     };
-
-    const handleEditTask = async (task) => {
-        // Define what fields you want to update, for example:
-        const updatedFields = {
-            status: 'In Progress', // this should be dynamic based on user input
-            // ... other fields to update
-        };
-    
-        const { database } = firebase;
-        const taskRef = doc(database, "tasks", task.id);
-    
-        try {
-            await updateDoc(taskRef, updatedFields);
-            toast.success("Task updated successfully");
-    
-            // Update local state
-            setTasks(prevTasks =>
-                prevTasks.map(t => 
-                    t.id === task.id ? { ...t, ...updatedFields } : t
-                )
-            );
-        } catch (error) {
-            toast.error(`Error updating task: ${error.message}`);
-        }
-    };
-    
       
     const handleDeleteTask = async (taskId) => {
         if (window.confirm('Are you sure you want to delete this task?')) {
@@ -66,7 +40,6 @@ function Tasks() {
             try {
                 await deleteDoc(taskRef);
                 toast.success("Task deleted successfully");
-                // Update local state to remove the deleted task
                 setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
             } catch (error) {
                 toast.error(`Error deleting task: ${error.message}`);
@@ -78,6 +51,7 @@ function Tasks() {
         const unsubscribe = firebase.authentication.onAuthStateChanged(user => {
           if (user) {
             fetchTasks(user.uid); 
+            console.log(tasks);
           } else {
             toast.info("Please log in to see the page");
             setTasks([]); 
@@ -85,7 +59,7 @@ function Tasks() {
         });
    
         return () => unsubscribe();
-    }, []); 
+    });
 
     function fetchTasks(userId) {
         const { database } = firebase;
@@ -139,7 +113,6 @@ function Tasks() {
                     open={isManageDialogOpen}
                     onClose={handleCloseManageDialog}
                     tasks={tasks}
-                    onEdit={handleEditTask}
                     onDelete={handleDeleteTask}
                 />
             </div>

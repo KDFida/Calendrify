@@ -13,8 +13,11 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
+import { updateDoc, doc } from 'firebase/firestore';
+import firebase from '../../../firebase/firebase';
+import { toast } from 'react-toastify';
 
-function ManageTasksDialog({ open, onClose, tasks, onEdit, onDelete }) {
+function ManageTasksDialog({ open, onClose, tasks, onDelete }) {
   const [selectedTask, setSelectedTask] = useState(null);
   const [status, setStatus] = useState('');
   const [deadline, setDeadline] = useState('');
@@ -25,15 +28,29 @@ function ManageTasksDialog({ open, onClose, tasks, onEdit, onDelete }) {
     setDeadline(task.deadline);
   };
 
-  const handleEdit = () => {
+  const handleEdit = async () => {
     if (selectedTask) {
-      onEdit(selectedTask.id, { status, deadline });
+      const taskRef = doc(firebase.database, "tasks", selectedTask.id);
+
+      const updatedFields = {
+        status: status,
+        deadline: deadline
+      };
+
+      try {
+        await updateDoc(taskRef, updatedFields);
+        toast.success("Task updated successfully!");
+
+        setSelectedTask(null);
+        onClose();
+      } catch (error) {
+        toast.error("Error updating task");
+      }
     }
-    setSelectedTask(null);
   };
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
+    <Dialog open={open} onClose={() => { onClose(); setSelectedTask(null); }} fullWidth maxWidth="sm">
       <DialogTitle>Manage Tasks</DialogTitle>
       <List>
         {tasks.map((task) => (
