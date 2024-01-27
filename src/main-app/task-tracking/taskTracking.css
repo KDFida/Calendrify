@@ -80,11 +80,11 @@
     }
 
     .task-section, .today-tasks {
-        width: 100%;
-        margin-bottom: 20px;
+        width: 100%; 
+        margin-bottom: 20px; 
     }
 
     .task-tracking-container {
-        padding: 10px;
+        padding: 10px; 
     }
 }
