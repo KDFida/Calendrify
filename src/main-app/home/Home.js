@@ -12,10 +12,15 @@ function filterTasksByPriority(tasks, priority) {
     return tasks.filter(task => task.priority === priority);
 }
 
+function filterTasksForToday(tasks) {
+  const today = new Date().toISOString().split('T')[0];
+  return tasks.filter(task => task.deadline === today);
+}
   
 function Home() {
     const [tasks, setTasks] = useState([]);
     const highPriorityTasks = filterTasksByPriority(tasks, 'high');
+    const dueToday = filterTasksForToday(tasks);
 
     useEffect(() => {
         const unsubscribe = firebase.authentication.onAuthStateChanged(user => {
@@ -78,6 +83,21 @@ function Home() {
                 ) : (
                     <p>No high priority tasks.</p>
                 )}
+            </div>
+
+            <div className="tasks-due-today-card">
+              <h2>Tasks Due Today</h2>
+              {dueToday.length > 0 ? (
+                <ul>
+                  {dueToday.map(task => (
+                    <li key={task.id}>
+                      {task.name} - Due: {task.deadline}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No tasks due today.</p>
+              )}
             </div>
           </div>
         </div>
