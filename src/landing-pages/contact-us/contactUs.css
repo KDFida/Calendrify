@@ -5,7 +5,7 @@
     align-items: center;
 }
 
-.title {
+.contactus-title {
     color: black;
 }
 
@@ -38,17 +38,19 @@
     outline: none;
 }
 
-.contact-form button {
+.contact-form .contactus-button {
     padding: 10px 20px;
     margin-top: 20px;
     background-color: #147efb;
     border: 1px solid #147efb;
     border-radius: 30px;
     cursor: pointer;
+    width: auto;
 }
 
-.contact-form button:hover {
+.contact-form .contactus-button:hover {
     background-color: transparent;
     border-color: #147efb;
+    color: black;
     transition: all 0.3s ease-in-out;
 }

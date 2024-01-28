@@ -55,7 +55,7 @@ function Settings() {
 
                     <div className="delete">
                         <h2>Delete Account</h2>
-                        <button onClick={handleDeleteAccount}>Delete My Account</button>
+                        <button className="deleteAccount-button" onClick={handleDeleteAccount}>Delete My Account</button>
                     </div>
                 </div>
 

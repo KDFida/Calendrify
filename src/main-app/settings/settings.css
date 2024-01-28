@@ -65,11 +65,11 @@ button:hover {
     background-color: #0056b3;
 }
 
-.delete button {
+.delete .deleteAccount-button {
     background-color: #dc3545;
 }
 
-.delete button:hover {
+.delete .deleteAccount-button:hover {
     background-color: #bd2130;
 }
 
