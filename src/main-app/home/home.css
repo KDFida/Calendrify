@@ -48,19 +48,36 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 3px;
-  }
+}
   
-  .tasks-due-today-card h2 {
+.tasks-due-today-card h2 {
     margin-bottom: 15px;
-  }
-  
-  .tasks-due-today-card ul {
+}
+
+.tasks-due-today-card ul {
     list-style: none;
     padding: 0;
-  }
-  
-  .tasks-due-today-card li {
+}
+
+.tasks-due-today-card li {
     padding: 10px 0;
     border-bottom: 1px solid #eaeaea;
-  }
+}
+
+.time-widget {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: auto;
+    text-align: center;
+}
   
+.time-widget h2 {
+    margin-bottom: 15px;
+}
+  
+.time-widget p {
+    font-size: 2rem;
+    margin: 0;
+}
