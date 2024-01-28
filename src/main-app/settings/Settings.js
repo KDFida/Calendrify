@@ -45,6 +45,7 @@ function Settings() {
                     <h2>Change Password</h2>
                     <form onSubmit={handleChangePassword}>
                         <input
+                            className="newPassword-input"
                             type="password"
                             placeholder="Enter new password"
                             value={newPassword}
