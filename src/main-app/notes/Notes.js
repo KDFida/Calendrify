@@ -84,11 +84,13 @@ function Notes() {
                                     <button className="edit-icon" onClick={() => navigate(`/app/notes/edit/${note.id}`)}>
                                         <MdModeEdit
                                             size={18}
+                                            color="blue"
                                         />
                                     </button>
                                     <button className="delete-icon" onClick={() => deleteNote(note.id)}>
                                         <MdDelete
                                             size={18}
+                                            color="red"
                                         />
                                     </button>
                                 </div>
