@@ -8,8 +8,14 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import '@fullcalendar/daygrid';
 
+function filterTasksByPriority(tasks, priority) {
+    return tasks.filter(task => task.priority === priority);
+}
+
+  
 function Home() {
     const [tasks, setTasks] = useState([]);
+    const highPriorityTasks = filterTasksByPriority(tasks, 'high');
 
     useEffect(() => {
         const unsubscribe = firebase.authentication.onAuthStateChanged(user => {
@@ -52,11 +58,26 @@ function Home() {
                 initialView="dayGridMonth"
                 events={tasks}
                 headerToolbar={{
-                  left: 'prev,next today',
+                  left: 'prev,next,today',
                   center: 'title',
                   right: 'dayGridMonth,dayGridWeek,dayGridDay'
                 }}
               />
+            </div>
+
+            <div className="task-summary-card">
+                <h2>High Priority Tasks</h2>
+                {highPriorityTasks.length > 0 ? (
+                    <ul>
+                    {highPriorityTasks.map(task => (
+                        <li key={task.id}>
+                        {task.name} - Due: {task.deadline}
+                        </li>
+                    ))}
+                    </ul>
+                ) : (
+                    <p>No high priority tasks.</p>
+                )}
             </div>
           </div>
         </div>
