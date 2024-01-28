@@ -1,0 +1,18 @@
+.quote-widget {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+  
+.quote-text {
+    font-style: italic;
+    font-size: 1.2rem;
+}
+  
+.quote-author {
+    text-align: right;
+    font-weight: bold;
+    margin-top: 10px;
+}

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import '@fullcalendar/daygrid';
+import TimeWidget from "./time/TimeWidget";
 import QuoteWidget from "./quotes/QuoteWidget";
 
 function filterTasksByPriority(tasks, priority) {
@@ -16,25 +17,6 @@ function filterTasksByPriority(tasks, priority) {
 function filterTasksForToday(tasks) {
   const today = new Date().toISOString().split('T')[0];
   return tasks.filter(task => task.deadline === today);
-}
-
-function TimeWidget() {
-  const [currentTime, setCurrentTime] = useState(new Date());
-
-  useEffect(() => {
-    const timerId = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-
-    return () => clearInterval(timerId);
-  }, []);
-
-  return (
-    <div className="time-widget">
-      <h2>Current Time</h2>
-      <p>{currentTime.toLocaleTimeString()}</p>
-    </div>
-  );
 }
 
 function Home() {

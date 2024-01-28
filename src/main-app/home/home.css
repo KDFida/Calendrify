@@ -63,21 +63,3 @@
     padding: 10px 0;
     border-bottom: 1px solid #eaeaea;
 }
-
-.time-widget {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: auto;
-    text-align: center;
-}
-  
-.time-widget h2 {
-    margin-bottom: 15px;
-}
-  
-.time-widget p {
-    font-size: 2rem;
-    margin: 0;
-}
