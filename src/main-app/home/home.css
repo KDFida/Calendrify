@@ -1,0 +1,14 @@
+.app-home-page-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    margin-left: 80px;
+}
+  
+.home-calendar-view {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+}
+  
