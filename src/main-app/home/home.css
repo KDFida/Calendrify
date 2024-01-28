@@ -11,4 +11,28 @@
     min-width: 300px;
     max-width: 600px;
 }
-  
+
+.task-summary-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3px;
+}
+
+.task-summary-card h2 {
+    margin-bottom: 15px;
+}
+
+.task-summary-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.task-summary-card li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
