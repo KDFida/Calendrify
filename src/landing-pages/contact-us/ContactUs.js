@@ -31,13 +31,13 @@ function ContactUs() {
 
     return (
         <div className="contact-container">
-            <h1 className="title">Contact Us</h1>
+            <h1 className="conatctus-title">Contact Us</h1>
             <form className="contact-form" onSubmit={sendMessage}>
                 <input id="name" type="text" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} required />
                 <input id="email" type="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} required />
                 <textarea id="message" placeholder="Write your message..." value={message} onChange={(e) => setMessage(e.target.value)} required />
 
-                <button type="submit" onClick={sendMessage}>Send Message</button>
+                <button className="contactus-button" type="submit" onClick={sendMessage}>Send Message</button>
             </form>
         </div>
     )

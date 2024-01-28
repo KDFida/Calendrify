@@ -37,12 +37,14 @@
     border: 1px solid #147efb;
     border-radius: 30px;
     cursor: pointer;
+    width: auto;
 }
 
 .signup-form button:hover {
     background-color: transparent;
     border-color: #147efb;
     transition: all 0.3s ease-in-out;
+    color: black;
 }
 
 .already-registered {
