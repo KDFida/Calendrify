@@ -16,7 +16,26 @@ function filterTasksForToday(tasks) {
   const today = new Date().toISOString().split('T')[0];
   return tasks.filter(task => task.deadline === today);
 }
-  
+
+function TimeWidget() {
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timerId);
+  }, []);
+
+  return (
+    <div className="time-widget">
+      <h2>Current Time</h2>
+      <p>{currentTime.toLocaleTimeString()}</p>
+    </div>
+  );
+}
+
 function Home() {
     const [tasks, setTasks] = useState([]);
     const highPriorityTasks = filterTasksByPriority(tasks, 'high');
@@ -99,6 +118,8 @@ function Home() {
                 <p>No tasks due today.</p>
               )}
             </div>
+
+            <TimeWidget />
           </div>
         </div>
       );
