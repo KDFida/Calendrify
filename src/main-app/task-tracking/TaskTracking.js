@@ -5,6 +5,16 @@ import firebase from "../../firebase/firebase";
 import { getDocs, collection, query, where } from "firebase/firestore";
 import { toast } from "react-toastify";
 
+function changeStatus(status) {
+    if (status === "notStarted") {
+        return "not started"
+    } else if (status === "inProgress") {
+        return "in progress"
+    } else if (status === "today") {
+        return "due today"
+    }
+}
+
 function TaskTracking() {
     const [inProgressTasks, setInProgressTasks] = useState([]);
     const [notStartedTasks, setNotStartedTasks] = useState([]);
@@ -44,8 +54,9 @@ function TaskTracking() {
     }
 
     const renderTasks = (tasks, status) => {
+        const statusUser = changeStatus(status);
         if (tasks.length === 0) {
-            return <div className="no-tasks-message">No tasks {status}.</div>;
+            return <div className="no-tasks-message">No tasks {statusUser}.</div>;
         }
         return tasks.map((task, index) => (
             <div key={index} className="task-item">
