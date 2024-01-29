@@ -37,7 +37,6 @@
     background: none;
 }
 
-
 .manageTasksButton {
     padding: 10px;
     border: none;
@@ -54,4 +53,20 @@
 
 .manageTasksButton:hover {
     background-color: #09043d; 
+}
+
+@media (max-width: 376px) {
+    .task-title {
+        font-size: 25px;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        margin-left: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tasks-container {
+        margin-left: 0; 
+        width: 100%; 
+    }    
 }
