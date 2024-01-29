@@ -60,7 +60,7 @@ function Home() {
           <div className="app-home-page-container">
             <div className="home-calendar-view">
               <FullCalendar
-                aspectRatio={2.8}
+                aspectRatio={2.0}
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
                 events={tasks}
@@ -102,8 +102,8 @@ function Home() {
               )}
             </div>
 
-            <TimeWidget />
-            <QuoteWidget />
+            <TimeWidget className="time-widget"/>
+            <QuoteWidget className="quote-widget"/>
           </div>
         </div>
       );

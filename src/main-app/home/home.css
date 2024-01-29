@@ -1,65 +1,92 @@
 .app-home-page-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto; 
     gap: 20px;
     padding: 20px;
     margin-left: 80px;
 }
-  
-.home-calendar-view {
-    flex: 1;
-    min-width: 300px;
-    max-width: 700px;
+
+.home-calendar-view,
+.task-summary-card,
+.tasks-due-today-card {
+    grid-column: span 1;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 3px;
 }
 
-.task-summary-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 3px;
+.fc-header-toolbar {
+    font-size: 0.85em;
 }
 
-.task-summary-card h2 {
-    margin-bottom: 15px;
+.fc .fc-toolbar-title {
+    font-size: 1.25em; 
+    margin: 10px;
+}
+
+.fc .fc-button-primary {
+    padding: 6px 10px; 
+    font-size: 0.85em; 
+}
+
+.fc .fc-daygrid-day-frame {
+    min-height: 100px; 
+}
+
+.fc .fc-daygrid-event .fc-event-title {
+    font-size: 0.9em; 
+    white-space: normal; 
+}
+
+
+.fc .fc-daygrid-event {
+    padding: 2px 4px; 
+}
+
+.fc .fc-daygrid-event .fc-event-title-container {
+    align-items: center; 
+    display: block; 
 }
 
 .task-summary-card ul {
-    list-style: none;
-    padding: 0;
+    margin-left: 15px;
 }
 
-.task-summary-card li {
-    padding: 10px 0;
-    border-bottom: 1px solid #eaeaea;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.tasks-due-today-card {
+.quote-widget,
+.time-widget {
+    grid-column: span 3;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 3px;
-}
-  
-.tasks-due-today-card h2 {
-    margin-bottom: 15px;
 }
 
-.tasks-due-today-card ul {
-    list-style: none;
-    padding: 0;
-}
+@media (max-width: 768px) {
+    .app-home-page-container {
+        grid-template-columns: 1fr;
+        margin-left: 0;
+    }
 
-.tasks-due-today-card li {
-    padding: 10px 0;
-    border-bottom: 1px solid #eaeaea;
+    .home-calendar-view {
+        margin-top: 80px;
+    }
+
+    .fc-header-toolbar {
+        font-size: 0.75em; 
+    }
+
+    .fc .fc-toolbar-title {
+        font-size: 1em; 
+    }
+
+    .fc .fc-button-primary {
+        padding: 4px 8px; 
+    }
+
+    .quote-widget,
+    .time-widget {
+        grid-column: span 1; 
+    }
 }
