@@ -107,7 +107,7 @@ function Calendar() {
 
                 <div className="calendar-view">
                     <FullCalendar
-                        aspectRatio={2.7}
+                        aspectRatio={2.0}
                         plugins={[dayGridPlugin]}
                         initialView="dayGridMonth"
                         weekends={true}
