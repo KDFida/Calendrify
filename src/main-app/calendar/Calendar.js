@@ -79,7 +79,8 @@ function Calendar() {
               title: doc.data().name,
               start: doc.data().deadline,
               ...doc.data()
-            }));
+            }))
+            .filter(task => task.status !== 'finished');
             setTasks(tasksArray);
           })
           .catch(error => {
