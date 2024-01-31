@@ -5,16 +5,18 @@ import './calendar.css';
 import '@fullcalendar/daygrid';
 import Sidebar from "../../components/sidebar/Sidebar";
 import { AiFillPlusCircle } from "react-icons/ai";
-import AddTaskDialog from "./add-task/AddTaskDialog";
+import AddTaskDialog from "../components/add-task/AddTaskDialog";
 import AvailabilityDialog from "./availability/AvailabilityDialog";
+import ManageTasksDialog from "../components/manage-task/ManageTasksDialog";
 import firebase from "../../firebase/firebase";
-import { collection, query, where, getDocs } from "@firebase/firestore";
+import { collection, query, where, getDocs, doc, deleteDoc } from "@firebase/firestore";
 import { toast } from "react-toastify";
 
 function Calendar() {
     const [tasks, setTasks] = useState([]);
     const [isDialogOpen, setDialogOpen] = useState(false);
     const [isAvailabilityDialogOpen, setAvailabilityDialogOpen] = useState(false);
+    const [isManageDialogOpen, setManageDialogOpen] = useState(false);
 
     const handleAddTask = () => {
       setDialogOpen(true);
@@ -30,6 +32,29 @@ function Calendar() {
 
     const handleCloseAddAvailability = () => {
         setAvailabilityDialogOpen(false);
+    };
+
+    const handleManageTasks = () => {
+      setManageDialogOpen(true);
+    };
+  
+    const handleCloseManageDialog = () => {
+      setManageDialogOpen(false);
+    };
+        
+    const handleDeleteTask = async (taskId) => {
+        if (window.confirm('Are you sure you want to delete this task?')) {
+            const { database } = firebase;
+            const taskRef = doc(database, "tasks", taskId);
+            
+            try {
+                await deleteDoc(taskRef);
+                toast.success("Task deleted successfully");
+                setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
+            } catch (error) {
+                toast.error(`Error deleting task: ${error.message}`);
+            }
+        }
     };
 
     useEffect(() => {
@@ -54,7 +79,8 @@ function Calendar() {
               title: doc.data().name,
               start: doc.data().deadline,
               ...doc.data()
-            }));
+            }))
+            .filter(task => task.status !== 'finished');
             setTasks(tasksArray);
           })
           .catch(error => {
@@ -71,6 +97,9 @@ function Calendar() {
                     <div className="buttons">
                         <button className="availabilityButton" onClick={handleAddAvailability}>Set Availability</button>
                         <button className="regenerateButton">New timetable</button>
+                        <button className="manageTasksButton" onClick={handleManageTasks}>
+                            Manage Tasks
+                        </button>
                         <button className="addTaskButton" onClick={handleAddTask}>                        
                             <AiFillPlusCircle size={40} color="#09043d" />
                         </button>
@@ -79,7 +108,7 @@ function Calendar() {
 
                 <div className="calendar-view">
                     <FullCalendar
-                        aspectRatio={2.7}
+                        aspectRatio={2.0}
                         plugins={[dayGridPlugin]}
                         initialView="dayGridMonth"
                         weekends={true}
@@ -94,6 +123,12 @@ function Calendar() {
                 </div>
             </div>
             <AddTaskDialog open={isDialogOpen} onClose={handleCloseDialog}/>
+            <ManageTasksDialog
+                    open={isManageDialogOpen}
+                    onClose={handleCloseManageDialog}
+                    tasks={tasks}
+                    onDelete={handleDeleteTask}
+              />
             <AvailabilityDialog open={isAvailabilityDialogOpen} onClose={handleCloseAddAvailability} />
         </div>
     )
