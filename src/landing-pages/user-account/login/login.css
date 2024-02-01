@@ -5,10 +5,6 @@
     align-items: center;
 }
 
-.login-title {
-    color: black;
-}
-
 .login-form {
     display: flex;
     flex-direction: column;
@@ -29,19 +25,21 @@
     outline: none;
 }
 
-.login-form button {
+.login-form .signin-button {
     padding: 10px 20px;
     margin-top: 20px;
     background-color: #147efb;
     border: 1px solid #147efb;
     border-radius: 30px;
     cursor: pointer;
+    width: auto;
 }
 
-.login-form button:hover {
+.login-form .signin-button:hover {
     background-color: transparent;
     border-color: #147efb;
     transition: all 0.3s ease-in-out;
+    color: black;
 }
 
 .create-account {

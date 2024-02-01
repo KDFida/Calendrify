@@ -1,0 +1,92 @@
+.app-home-page-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto; 
+    gap: 20px;
+    padding: 20px;
+    margin-left: 80px;
+}
+
+.home-calendar-view,
+.task-summary-card,
+.tasks-due-today-card {
+    grid-column: span 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.fc-header-toolbar {
+    font-size: 0.85em;
+}
+
+.fc .fc-toolbar-title {
+    font-size: 1.25em; 
+    margin: 10px;
+}
+
+.fc .fc-button-primary {
+    padding: 6px 10px; 
+    font-size: 0.85em; 
+}
+
+.fc .fc-daygrid-day-frame {
+    min-height: 100px; 
+}
+
+.fc .fc-daygrid-event .fc-event-title {
+    font-size: 0.9em; 
+    white-space: normal; 
+}
+
+
+.fc .fc-daygrid-event {
+    padding: 2px 4px; 
+}
+
+.fc .fc-daygrid-event .fc-event-title-container {
+    align-items: center; 
+    display: block; 
+}
+
+.task-summary-card ul {
+    margin-left: 15px;
+}
+
+.quote-widget,
+.time-widget {
+    grid-column: span 3;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .app-home-page-container {
+        grid-template-columns: 1fr;
+        margin-left: 0;
+    }
+
+    .home-calendar-view {
+        margin-top: 80px;
+    }
+
+    .fc-header-toolbar {
+        font-size: 0.75em; 
+    }
+
+    .fc .fc-toolbar-title {
+        font-size: 1em; 
+    }
+
+    .fc .fc-button-primary {
+        padding: 4px 8px; 
+    }
+
+    .quote-widget,
+    .time-widget {
+        grid-column: span 1; 
+    }
+}

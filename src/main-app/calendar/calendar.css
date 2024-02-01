@@ -58,6 +58,17 @@
 }
 
 @media (max-width: 768px) {
+    .calendar-container {
+        margin-left: 0; 
+        width: 100%; 
+    }
+
+    .top-bar {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
     .calendar {
         margin-left: 0;
         width: 100%;

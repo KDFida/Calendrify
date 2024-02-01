@@ -32,7 +32,7 @@ function Login() {
                     <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
                     <input id="password" type="password" value={password} onChange={(e) => setPasword(e.target.value)} placeholder="Password" />
                     <Link className="forgot-password" to="/forgot-password">Forgot Password?</Link>
-                    <button id="submit-button" type="submit" onClick={signIn}>Sign In</button>
+                    <button className="signin-button" id="submit-button" type="submit" onClick={signIn}>Sign In</button>
                     <p className="create-account"> Not registered? <Link to="/create-account">Sign Up</Link></p>
                 </form>
             </div>

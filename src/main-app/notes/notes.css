@@ -93,12 +93,17 @@
 
 .icons {
     position: absolute;
+    display: flex;
+    flex-direction: row;
     bottom: 10px; 
     right: 10px; 
+    gap: 5px;
 }
 
-.note-card button {
-    background: none; 
+.note-card .delete-icon,
+.note-card .edit-icon {
+    background: none;
+    background-color: transparent; 
     border: none; 
     cursor: pointer;
     padding: 0; 
