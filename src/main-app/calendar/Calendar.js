@@ -183,7 +183,7 @@ function Calendar() {
                 <div className="top-bar">
                     <p className="calendar-title">Calendar</p>
                     <div className="buttons">
-                        <select value={preference} onChange={(e) => handlePreferenceChange(e.target.value)}>
+                        <select className="select-style" value={preference} onChange={(e) => handlePreferenceChange(e.target.value)}>
                           <option value="priority">Priority</option>
                           <option value="deadline">Deadline</option>
                         </select>
