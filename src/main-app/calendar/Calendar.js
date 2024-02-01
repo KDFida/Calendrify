@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import './calendar.css';
@@ -67,7 +67,7 @@ function Calendar() {
       handleNewTimetable();
     };
 
-    const handleNewTimetable = async () => {
+    const handleNewTimetable = useCallback(async () => {
       const newSchedule = generateSchedule(tasks, availability, preference);
   
       try {
@@ -88,7 +88,11 @@ function Calendar() {
       } catch (error) {
           toast.error("Error saving schedule: " + error.message);
       }
-    };
+    }, [tasks, availability, preference, scheduleId]);
+
+    useEffect(() => {
+      handleNewTimetable();
+    }, [handleNewTimetable]);
 
     useEffect(() => {
         const unsubscribe = firebase.authentication.onAuthStateChanged(user => {
