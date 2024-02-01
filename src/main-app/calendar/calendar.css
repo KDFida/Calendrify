@@ -27,7 +27,8 @@
 }
 
 .availabilityButton,
-.regenerateButton {
+.regenerateButton,
+.manageTasksButton {
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -49,12 +50,37 @@
 }
 
 .availabilityButton:hover,
-.regenerateButton:hover {
+.regenerateButton:hover,
+.manageTasksButton:hover {
     background-color: #09043d; 
 }
 
 .addTaskButton:hover {
     background: none;
+}
+
+.select-style {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border: 1px solid #dfe1e5;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: fit-content;
+}
+  
+.select-style:hover {
+    border-color: #c6c6c6;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+  
+.select-style:focus {
+    outline: none;
+    border-color: #a8a8a8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 768px) {
@@ -94,7 +120,13 @@
     }
 
     .availabilityButton,
-    .regenerateButton {
+    .regenerateButton,
+    .manageTasksButton {
+        width: 100%;
+    }
+
+    .select-style {
+        text-align: center;
         width: 100%;
     }
 }
