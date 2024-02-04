@@ -21,7 +21,7 @@ describe('Home Component', () => {
   test('navigate to create account works', () => {
     render(<Router><Home /></Router>);
     expect(screen.getByRole('link')).toHaveAttribute('href', '/create-account');
-  });
+  }); 
 
   // Test case 4: Ensure "How It Works" section renders
   test('displays "How It Works" section correctly', () => {
