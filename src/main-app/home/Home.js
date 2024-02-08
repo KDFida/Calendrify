@@ -7,8 +7,8 @@ import { toast } from "react-toastify";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import '@fullcalendar/daygrid';
-import TimeWidget from "./time/TimeWidget";
-import QuoteWidget from "./quotes/QuoteWidget";
+import TimeWidget from "../components/time/TimeWidget";
+import QuoteWidget from "../components/quotes/QuoteWidget";
 
 function filterTasksByPriority(tasks, priority) {
     return tasks.filter(task => task.priority === priority);
