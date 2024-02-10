@@ -55,20 +55,30 @@ function Sidebar() {
                             color='#F6F3E4'/>
                         </NavLink>
                     </div>
-                        <NavLink to="/app/home" className="sidebar-icon" activeClassName="activePage" onClick={ clicked }><AiFillHome size={24}/></NavLink>
-                        <NavLink to="/app/calendar" className="sidebar-icon" activeClassName="activePage" onClick={ clicked }><BiSolidCalendar size={24}/></NavLink>
-                        <NavLink to="/app/tasks" className="sidebar-icon" activeClassName="activePage" onClick={ clicked }><FaTasks size={24}/></NavLink>
-                        <NavLink to="/app/task-tracking" className="sidebar-icon" activeClassName="activePage" onClick={ clicked }><BiSolidTimer size={30}/></NavLink>
-                        <NavLink to="/app/notes" className="sidebar-icon" activeClassName="activePage" onClick={ clicked }><FaStickyNote size={24}/></NavLink>
+                        <NavLink to="/app/home" className="sidebar-icon" activeClassName="activePage" onClick={ clicked } data-testid="home-link">
+                          <AiFillHome size={24}/>
+                        </NavLink>
+                        <NavLink to="/app/calendar" className="sidebar-icon" activeClassName="activePage" onClick={ clicked } data-testid="calendar-link">
+                          <BiSolidCalendar size={24}/>
+                        </NavLink>
+                        <NavLink to="/app/tasks" className="sidebar-icon" activeClassName="activePage" onClick={ clicked } data-testid="tasks-link">
+                          <FaTasks size={24}/>
+                        </NavLink>
+                        <NavLink to="/app/task-tracking" className="sidebar-icon" activeClassName="activePage" onClick={ clicked } data-testid="task-tracking-link">
+                          <BiSolidTimer size={30}/>
+                        </NavLink>
+                        <NavLink to="/app/notes" className="sidebar-icon" activeClassName="activePage" onClick={ clicked } data-testid="notes-link">
+                          <FaStickyNote size={24}/>
+                        </NavLink>
                     <div className='settings-icon' onClick={ clicked }>
-                        <NavLink to="/app/settings" className="settings-icon">
+                        <NavLink to="/app/settings" className="settings-icon" data-testid="settings-link">
                         <IoIosSettings 
                             size={36}
                             color='#F6F3E4'/>
                         </NavLink>
                     </div>
                     <div className='logout-icon' onClick={ logoutClicked }>
-                        <NavLink to="/home" className="logout-icon">
+                        <NavLink to="/home" className="logout-icon" data-testid="logout-link">
                         <HiOutlineLogout 
                             size={32}
                             color='#F6F3E4'/>
