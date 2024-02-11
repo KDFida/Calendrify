@@ -43,7 +43,10 @@ function Settings() {
                 <h1>Settings</h1>
                 <div className="settings-container">
                     <h2>Change Password</h2>
-                    <form onSubmit={handleChangePassword}>
+                    <form onSubmit={(e) => {
+                        e.preventDefault();
+                        handleChangePassword(newPassword);
+                    }}>
                         <input
                             className="newPassword-input"
                             type="password"
