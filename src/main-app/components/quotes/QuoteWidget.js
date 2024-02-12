@@ -21,7 +21,7 @@ function QuoteWidget() {
     return (
       <div className="quote-widget">
         <p className="quote-text">"{quote}"</p>
-        <p className="quote-author">- {author}</p>
+        {author && <p className="quote-author">- {author}</p>}
       </div>
     );
 }
