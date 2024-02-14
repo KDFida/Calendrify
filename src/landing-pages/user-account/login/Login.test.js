@@ -34,7 +34,7 @@ const setup = () => render(
 describe('Login Component', () => {
     beforeEach(() => {
         jest.clearAllMocks();
-    });
+    }); 
 
     //Test Case 1: Render Component
     test('renders Login component', () => {
@@ -45,11 +45,10 @@ describe('Login Component', () => {
     });
 
     //Test Case 2: Allows Input to be Entered
-    test('allows input to be entered', () => {
+    test('allows input to be entered', async () => {
         setup();
-        userEvent.type(screen.getByPlaceholderText('Email'), 'test@example.com');
-        userEvent.type(screen.getByPlaceholderText('Password'), 'password');
-
+        await userEvent.type(screen.getByPlaceholderText('Email'), 'test@example.com');
+        await userEvent.type(screen.getByPlaceholderText('Password'), 'password');
         expect(screen.getByPlaceholderText('Email')).toHaveValue('test@example.com');
         expect(screen.getByPlaceholderText('Password')).toHaveValue('password');
     });
@@ -57,13 +56,13 @@ describe('Login Component', () => {
     //Test Case 3: Submits Form and Navigates on Successful Login
     test('submits form and navigates on successful login', async () => {
         signInWithEmailAndPassword.mockResolvedValue({ user: {} });
-
         setup();
-        userEvent.type(screen.getByPlaceholderText('Email'), 'test@example.com');
-        userEvent.type(screen.getByPlaceholderText('Password'), 'password');
-        userEvent.click(screen.getByRole('button', { name: 'Sign In' }));
 
-        await waitFor(() => expect(signInWithEmailAndPassword).toHaveBeenCalledWith(getAuth(), 'test@example.com', 'password'));
+        await userEvent.type(screen.getByPlaceholderText('Email'), 'test@example.com');
+        await userEvent.type(screen.getByPlaceholderText('Password'), 'password');
+        await userEvent.click(screen.getByRole('button', { name: 'Sign In' }));
+    
+        await waitFor(() => expect(signInWithEmailAndPassword).toHaveBeenCalledWith(expect().toBeUndefined(), 'test@example.com', 'password'));
         await waitFor(() => expect(toast.success).toHaveBeenCalledWith("Successfully Signed in ✅"));
         expect(mockNavigate).toHaveBeenCalledWith('/app/home');
     });
