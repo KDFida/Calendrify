@@ -58,18 +58,19 @@ describe('Signup Component', () => {
     });
 
     //Test Case 2: Allows Input to be Entered
-    test('allows input to be entered', () => {
+    test('allows input to be entered', async () => {
         setup();
-        userEvent.type(screen.getByPlaceholderText('Full Name'), 'John Doe');
-        userEvent.type(screen.getByPlaceholderText('Email'), 'john@example.com');
-        userEvent.type(screen.getByPlaceholderText('Password'), 'Password123!');
-        userEvent.type(screen.getByPlaceholderText('Confirm Password'), 'Password123!');
-
+        await userEvent.type(screen.getByPlaceholderText('Full Name'), 'John Doe');
+        await userEvent.type(screen.getByPlaceholderText('Email'), 'john@example.com');
+        await userEvent.type(screen.getByPlaceholderText('Password'), 'Password123!');
+        await userEvent.type(screen.getByPlaceholderText('Confirm Password'), 'Password123!');
+    
         expect(screen.getByPlaceholderText('Full Name')).toHaveValue('John Doe');
         expect(screen.getByPlaceholderText('Email')).toHaveValue('john@example.com');
         expect(screen.getByPlaceholderText('Password')).toHaveValue('Password123!');
         expect(screen.getByPlaceholderText('Confirm Password')).toHaveValue('Password123!');
     });
+    
 
     //Test Case 3: Submits Form and Navigates on Successful Signup
     test('submits form and navigates on successful signup', async () => {
@@ -77,17 +78,17 @@ describe('Signup Component', () => {
         setDoc.mockResolvedValue(() => Promise.resolve());
 
         setup();
-        userEvent.type(screen.getByPlaceholderText('Full Name'), 'John Doe');
-        userEvent.type(screen.getByPlaceholderText('Email'), 'john@example.com');
-        userEvent.type(screen.getByPlaceholderText('Password'), 'Password123!');
-        userEvent.type(screen.getByPlaceholderText('Confirm Password'), 'Password123!');
-        userEvent.click(screen.getByRole('button', { name: 'Create Account' }));
+        await userEvent.type(screen.getByPlaceholderText('Full Name'), 'John Doe');
+        await userEvent.type(screen.getByPlaceholderText('Email'), 'john@example.com');
+        await userEvent.type(screen.getByPlaceholderText('Password'), 'Password123!');
+        await userEvent.type(screen.getByPlaceholderText('Confirm Password'), 'Password123!');
+        await userEvent.click(screen.getByRole('button', { name: 'Create Account' }));
 
         await waitFor(() => expect(createUserWithEmailAndPassword).toHaveBeenCalledWith(getAuth(), 'john@example.com', 'Password123!'));
         await waitFor(() => expect(toast.success).toHaveBeenCalledWith("Account created successfully. Please log in!"));
         expect(mockNavigate).toHaveBeenCalledWith('/login');
     });
-
+ 
     //Test Case 4: Shows Error Toast on Failed Login
     test('shows error toast on failed signup', async () => {
         createUserWithEmailAndPassword.mockRejectedValue(new Error('Failed to create account'));
