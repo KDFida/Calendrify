@@ -59,7 +59,7 @@ function Home() {
         <div className="app-home-page">
           <Sidebar />
           <div className="app-home-page-container">
-            <div className="home-calendar-view">
+            <div className="home-calendar-view" data-testid="fullCalendar">
               <FullCalendar
                 aspectRatio={2.0}
                 plugins={[dayGridPlugin]}
@@ -104,7 +104,7 @@ function Home() {
             </div>
 
             <TimeWidget className="time-widget"/>
-            <QuoteWidget className="quote-widget"/>
+            <QuoteWidget className="quote-widget" />
           </div>
         </div>
       );
