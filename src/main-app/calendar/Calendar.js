@@ -187,22 +187,22 @@ function Calendar() {
                 <div className="top-bar">
                     <p className="calendar-title">Calendar</p>
                     <div className="buttons">
-                        <select className="select-style" value={preference} onChange={(e) => handlePreferenceChange(e.target.value)}>
+                        <select className="select-style" value={preference} onChange={(e) => handlePreferenceChange(e.target.value)} data-testid="dropdown-menu">
                           <option value="priority">Priority</option>
                           <option value="deadline">Deadline</option>
                         </select>
-                        <button className="availabilityButton" onClick={handleAddAvailability}>Set Availability</button>
-                        <button className="regenerateButton" onClick={handleNewTimetable}>New timetable</button>
-                        <button className="manageTasksButton" onClick={handleManageTasks}>
+                        <button className="availabilityButton" onClick={handleAddAvailability} data-testid="availabilityButton">Set Availability</button>
+                        <button className="regenerateButton" onClick={handleNewTimetable} data-testid="regenerateButton">New timetable</button>
+                        <button className="manageTasksButton" onClick={handleManageTasks} data-testid="manageTasksButton">
                             Manage Tasks
                         </button>
-                        <button className="addTaskButton" onClick={handleAddTask}>                        
+                        <button className="addTaskButton" onClick={handleAddTask} data-testid="addTaskButton">                        
                             <AiFillPlusCircle size={40} color="#09043d" />
                         </button>
                     </div>
                 </div>
 
-                <div className="calendar-view">
+                <div className="calendar-view" data-testid="fullCalendar">
                     <FullCalendar
                         aspectRatio={2.0}
                         plugins={[dayGridPlugin]}
