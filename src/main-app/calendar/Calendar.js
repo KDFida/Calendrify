@@ -90,9 +90,9 @@ function Calendar() {
       }
     }, [tasks, availability, preference, scheduleId]);
 
-    useEffect(() => {
-      handleNewTimetable();
-    }, [handleNewTimetable]);
+    // useEffect(() => {
+    //   handleNewTimetable();
+    // }, [handleNewTimetable]);
 
     useEffect(() => {
         const unsubscribe = firebase.authentication.onAuthStateChanged(user => {
