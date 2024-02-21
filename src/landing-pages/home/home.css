@@ -37,7 +37,8 @@ li {
     position: relative;
 }
 
-li::before {
+.how-it-works li::before,
+.benefits li::before {
     content: '';
     position: absolute;
     left: 215px;
