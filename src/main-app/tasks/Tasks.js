@@ -85,15 +85,15 @@ function Tasks() {
                 <div className="top-bar">
                     <p className="task-title">Tasks - Deadlines</p>
                     <div className="buttons">
-                        <button className="manageTasksButton" onClick={handleManageTasks}>
+                        <button className="manageTasksButton" onClick={handleManageTasks} data-testid="manageTasksButton">
                             Manage Tasks
                         </button>
-                        <button className="addTaskButton" onClick={handleAddTask}>                        
+                        <button className="addTaskButton" onClick={handleAddTask} data-testid="addTaskButton">                       
                             <AiFillPlusCircle size={40} color="#09043d" />
                         </button>
                     </div>
                 </div>
-                <div className="calendar-view">
+                <div className="calendar-view" data-testid="fullCalendar">
                     <FullCalendar
                         aspectRatio={2.0}
                         plugins={[dayGridPlugin]}
