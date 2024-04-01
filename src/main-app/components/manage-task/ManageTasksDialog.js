@@ -21,11 +21,13 @@ function ManageTasksDialog({ open, onClose, tasks, onDelete }) {
   const [selectedTask, setSelectedTask] = useState(null);
   const [status, setStatus] = useState('');
   const [deadline, setDeadline] = useState('');
+  const [estimatedHours, setEstimatedHours] = useState('');
 
   const openEditDialog = (task) => {
     setSelectedTask(task);
     setStatus(task.status);
     setDeadline(task.deadline);
+    setEstimatedHours(task.estimatedHours);
   };
 
   const handleEdit = async () => {
@@ -34,7 +36,8 @@ function ManageTasksDialog({ open, onClose, tasks, onDelete }) {
 
       const updatedFields = {
         status: status,
-        deadline: deadline
+        deadline: deadline,
+        estimatedHours: estimatedHours
       };
 
       try {
@@ -89,6 +92,14 @@ function ManageTasksDialog({ open, onClose, tasks, onDelete }) {
             InputLabelProps={{
               shrink: true,
             }}
+          />
+          <TextField
+            label="Estimated Hours"
+            type="number"
+            value={estimatedHours}
+            onChange={(e) => setEstimatedHours(e.target.value)}
+            fullWidth
+            margin="dense"
           />
         </DialogContent>
       )}
