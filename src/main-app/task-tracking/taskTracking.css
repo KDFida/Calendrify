@@ -33,6 +33,36 @@
     margin-top: 20px; 
 }
 
+.titleAndButton {
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 100px;
+    padding-top: 20px; 
+}
+
+.buttons {
+    margin-right: 20px;
+}
+
+.manageTasksButtonTracking {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #09043d;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    margin-top: 10px;
+    min-width: 150px;
+    max-height: 40px;
+}
+
+.manageTasksButtonTracking:hover {
+    background-color: #09043d; 
+}
+
 @media (max-width: 768px) {
     .task-tracking-container {
         margin-left: 50px;
@@ -52,6 +82,26 @@
 
     .today-tasks {
         margin-top: 0px;
+    }
+
+    .titleAndButton {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .manageTasksButtonTracking {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: #09043d;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        white-space: nowrap;
+        margin-top: 10px;
+        min-width: 150px;
+        max-height: 40px;
+        width: 80%;
     }
 }
 

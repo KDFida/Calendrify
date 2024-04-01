@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import './taskTracking.css';
 import Sidebar from "../../components/sidebar/Sidebar";
 import firebase from "../../firebase/firebase";
-import { getDocs, collection, query, where } from "firebase/firestore";
+import { getDocs, collection, query, where, doc, deleteDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import ManageTasksDialog from "../components/manage-task/ManageTasksDialog";
 
 function changeStatus(status) {
     if (status === "notStarted") {
@@ -19,6 +20,31 @@ function TaskTracking() {
     const [inProgressTasks, setInProgressTasks] = useState([]);
     const [notStartedTasks, setNotStartedTasks] = useState([]);
     const [todayTasks, setTodayTasks] = useState([]);
+    const [tasks, setTasks] = useState([]);
+    const [isManageDialogOpen, setManageDialogOpen] = useState(false);
+
+    const handleManageTasks = () => {
+        setManageDialogOpen(true);
+    };
+    
+    const handleCloseManageDialog = () => {
+        setManageDialogOpen(false);
+    };
+    
+    const handleDeleteTask = async (taskId) => {
+        if (window.confirm('Are you sure you want to delete this task?')) {
+            const { database } = firebase;
+            const taskRef = doc(database, "tasks", taskId);
+            
+            try {
+                await deleteDoc(taskRef);
+                toast.success("Task deleted successfully");
+                setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
+            } catch (error) {
+                toast.error(`Error deleting task: ${error.message}`);
+            }
+        }
+    };
 
     useEffect(() => {
         const unsubscribe = firebase.authentication.onAuthStateChanged(user => {
@@ -29,6 +55,7 @@ function TaskTracking() {
             setInProgressTasks([]);
             setNotStartedTasks([]);
             setTodayTasks([]); 
+            setTasks([]);
           }
         });
         return () => unsubscribe();
@@ -39,11 +66,16 @@ function TaskTracking() {
         const today = new Date().toISOString().split('T')[0];
         getDocs(query(collection(database, "tasks"), where("userId", "==", userId)))
           .then((querySnapshot) => {
-            const tasksArray = querySnapshot.docs.map(doc => doc.data());
+            const tasksArray = querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                title: doc.data().name,
+                start: doc.data().deadline,
+                ...doc.data()
+            })).filter(task => task.status !== 'finished');
             const inProgress = tasksArray.filter(task => task.status === 'inProgress');
             const notStarted = tasksArray.filter(task => task.status === 'notStarted');
             const dueToday = tasksArray.filter(task => task.deadline === today);
-
+            setTasks(tasksArray);
             setInProgressTasks(inProgress);
             setNotStartedTasks(notStarted);
             setTodayTasks(dueToday);
@@ -69,8 +101,13 @@ function TaskTracking() {
     return (
         <div className="task-tracking">
             <Sidebar />
-            <div className="title">
+            <div className="titleAndButton">
                 <h1 className="taskTracking-title">Task Tracking</h1>
+            <div className="buttons">
+                <button className="manageTasksButtonTracking" onClick={handleManageTasks}>
+                    Manage Tasks
+                </button>
+            </div>
             </div>
             <div className="task-tracking-container">
                 <div className="task-sections">
@@ -88,6 +125,13 @@ function TaskTracking() {
                     {renderTasks(todayTasks, 'today')}
                 </section>
             </div>
+
+            <ManageTasksDialog
+                    open={isManageDialogOpen}
+                    onClose={handleCloseManageDialog}
+                    tasks={tasks}
+                    onDelete={handleDeleteTask}
+            />
         </div>
     )
 }
