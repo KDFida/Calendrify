@@ -61,7 +61,7 @@ function TaskTracking() {
         return tasks.map((task, index) => (
             <div key={index} className="task-item">
                 <span className="tasks-title">{task.name}</span>
-                <span className="task-remaining">{task.estimatedHours} estimated hours</span>
+                <span className="task-remaining">{" - " + task.estimatedHours} estimated hours</span>
             </div>
         ));
     };
