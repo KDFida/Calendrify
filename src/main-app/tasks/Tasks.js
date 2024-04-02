@@ -62,6 +62,7 @@ function Tasks() {
 
     function fetchTasks(userId) {
         const { database } = firebase;
+        const today = new Date().toISOString().split('T')[0];
         getDocs(query(collection(database, "tasks"), where("userId", "==", userId)))
           .then((querySnapshot) => {
             const tasksArray = querySnapshot.docs.map((doc) => ({
@@ -69,9 +70,12 @@ function Tasks() {
               title: doc.data().name,
               start: doc.data().deadline,
               ...doc.data()
-            }))
-            .filter(task => task.status !== 'finished');
-            setTasks(tasksArray);
+            })).filter(task => task.status !== 'finished' && task.deadline >= today);
+            if (tasksArray.length === 0) {
+                setTasks([]);
+            } else {
+                setTasks(tasksArray);
+            }
           })
           .catch(error => {
             toast.error("Error fetching tasks");

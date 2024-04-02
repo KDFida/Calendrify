@@ -71,14 +71,18 @@ function TaskTracking() {
                 title: doc.data().name,
                 start: doc.data().deadline,
                 ...doc.data()
-            })).filter(task => task.status !== 'finished');
+            })).filter(task => task.status !== 'finished' && task.deadline >= today);
             const inProgress = tasksArray.filter(task => task.status === 'inProgress');
             const notStarted = tasksArray.filter(task => task.status === 'notStarted');
             const dueToday = tasksArray.filter(task => task.deadline === today);
-            setTasks(tasksArray);
-            setInProgressTasks(inProgress);
-            setNotStartedTasks(notStarted);
-            setTodayTasks(dueToday);
+            if (tasksArray.length === 0) {
+                setTasks([]);
+            } else {
+                setTasks(tasksArray);
+                setInProgressTasks(inProgress);
+                setNotStartedTasks(notStarted);
+                setTodayTasks(dueToday);
+            }
           })
           .catch(error => {
             toast.error("Error fetching tasks: " + error.message);
