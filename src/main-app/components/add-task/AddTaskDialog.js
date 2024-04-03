@@ -40,7 +40,8 @@ function AddTaskDialog({ open, onClose }) {
                 status: taskStatus,
                 estimatedHours: parseFloat(estimatedHours),
                 deadline: taskDeadline,
-                userId: user.uid
+                userId: user.uid,
+                actualHours: null
             });
             toast.success("Task added successfully!");
             onClose(); 
