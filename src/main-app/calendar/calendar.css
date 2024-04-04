@@ -28,7 +28,8 @@
 
 .availabilityButton,
 .regenerateButton,
-.manageTasksButton {
+.manageTasksButton,
+.actualHoursButton {
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -51,7 +52,8 @@
 
 .availabilityButton:hover,
 .regenerateButton:hover,
-.manageTasksButton:hover {
+.manageTasksButton:hover,
+.actualHoursButton:hover {
     background-color: #09043d; 
 }
 
@@ -121,7 +123,8 @@
 
     .availabilityButton,
     .regenerateButton,
-    .manageTasksButton {
+    .manageTasksButton,
+    .actualHoursButton {
         width: 100%;
     }
 

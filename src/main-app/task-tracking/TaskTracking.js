@@ -70,19 +70,8 @@ function TaskTracking() {
             }
         });
     
-        const today = new Date().toISOString().split('T')[0];
-        const tasksNeedingActualHours = tasks.filter(task => 
-            (task.status === 'finished' || task.deadline < today) && task.actualHours === undefined
-        );
-
-        if (tasksNeedingActualHours.length > 0) {
-            setFilteredTasks(tasksNeedingActualHours);
-        } else {
-            setFilteredTasks([]);
-        }
-    
         return () => unsubscribe();
-    }, [tasks]);
+    }, []);
 
     function fetchTasks(userId) {
         const { database } = firebase;
@@ -94,14 +83,22 @@ function TaskTracking() {
                 title: doc.data().name,
                 start: doc.data().deadline,
                 ...doc.data()
-            })).filter(task => task.status !== 'finished' && task.deadline >= today);
+            }));
             const inProgress = tasksArray.filter(task => task.status === 'inProgress');
             const notStarted = tasksArray.filter(task => task.status === 'notStarted');
             const dueToday = tasksArray.filter(task => task.deadline === today);
+            const tasksNeedingActualHours = tasksArray.filter(task => 
+                (task.status === 'finished' || task.deadline < today) && (task.actualHours === null || task.actualHours === '')
+            );
+            if (tasksNeedingActualHours.length > 0) {
+                setFilteredTasks(tasksNeedingActualHours);
+            } else {
+                setFilteredTasks([]);
+            }
             if (tasksArray.length === 0) {
                 setTasks([]);
             } else {
-                setTasks(tasksArray);
+                setTasks(tasksArray.filter(task => task.status !== 'finished' && task.deadline >= today));
                 setInProgressTasks(inProgress);
                 setNotStartedTasks(notStarted);
                 setTodayTasks(dueToday);

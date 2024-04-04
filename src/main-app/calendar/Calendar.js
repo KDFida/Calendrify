@@ -12,6 +12,7 @@ import firebase from "../../firebase/firebase";
 import { collection, query, where, getDocs, addDoc, updateDoc, doc, deleteDoc } from "@firebase/firestore";
 import { toast } from "react-toastify";
 import { generateSchedule } from "./schedule/GenerateSchedule";
+import ActualHoursDialog from "../components/actual-hours/ActualHoursDialog";
 
 function Calendar() {
     const [tasks, setTasks] = useState([]);
@@ -21,8 +22,17 @@ function Calendar() {
     const [isAvailabilityDialogOpen, setAvailabilityDialogOpen] = useState(false);
     const [scheduleId, setScheduleId] = useState(null);
     const [calendarEvents, setCalendarEvents] = useState(null);
+    const [Filteredtasks, setFilteredTasks] = useState([]);
     const [isManageDialogOpen, setManageDialogOpen] = useState(false);
+    const [isActualHoursDialogOpen, setIsActualHoursDialogOpen] = useState(false);
 
+    const handleOpenActualHoursChange = () => {
+      setIsActualHoursDialogOpen(true);
+    };
+  
+    const handleCloseActualHoursChange = () => {
+      setIsActualHoursDialogOpen(false);
+    };
     const handleAddTask = () => {
       setDialogOpen(true);
     };
@@ -120,11 +130,21 @@ function Calendar() {
             title: doc.data().name,
             start: doc.data().deadline,
             ...doc.data()
-          })).filter(task => task.status !== 'finished' && task.deadline >= today);
+          }));
+
+          const tasksNeedingActualHours = tasksArray.filter(task => 
+            (task.status === 'finished' || task.deadline < today) && (task.actualHours === null || task.actualHours === '')
+          );
+          if (tasksNeedingActualHours.length > 0) {
+              setFilteredTasks(tasksNeedingActualHours);
+          } else {
+              setFilteredTasks([]);
+          }
+
           if (tasksArray.length === 0) {
             setTasks([]);
           } else {
-            setTasks(tasksArray);
+            setTasks(tasksArray.filter(task => task.status !== 'finished' && task.deadline >= today));
           }
         })
         .catch(error => {
@@ -195,6 +215,9 @@ function Calendar() {
                           <option value="priority">Priority</option>
                           <option value="deadline">Deadline</option>
                         </select>
+                        <button className="actualHoursButton" onClick={handleOpenActualHoursChange}>
+                          Actual Hours
+                        </button>
                         <button className="availabilityButton" onClick={handleAddAvailability} data-testid="availabilityButton">Set Availability</button>
                         <button className="regenerateButton" onClick={handleNewTimetable} data-testid="regenerateButton">New timetable</button>
                         <button className="manageTasksButton" onClick={handleManageTasks} data-testid="manageTasksButton">
@@ -230,6 +253,11 @@ function Calendar() {
                     onDelete={handleDeleteTask}
               />
             <AvailabilityDialog open={isAvailabilityDialogOpen} onClose={handleCloseAddAvailability} />
+            <ActualHoursDialog
+                open={isActualHoursDialogOpen}
+                onClose={handleCloseActualHoursChange}
+                tasks={Filteredtasks}
+            />
         </div>
     )
 }

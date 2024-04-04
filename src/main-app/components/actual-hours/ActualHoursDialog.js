@@ -15,7 +15,7 @@ function ActualHoursDialog({ open, onClose, tasks }) {
   useEffect(() => {
     if (open) {
       const tasksToUpdate = tasks.filter(task => 
-        (new Date(task.deadline) < new Date() || task.status === 'finished') && (task.actualHours == null)
+        (new Date(task.deadline) < new Date() || task.status === 'finished') && (task.actualHours == null || task.actualHours === '')
       ).map(task => ({
         ...task,
         actualHoursInput: ''
