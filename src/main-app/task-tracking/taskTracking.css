@@ -45,7 +45,8 @@
     margin-right: 20px;
 }
 
-.manageTasksButtonTracking {
+.manageTasksButtonTracking,
+.actualHoursButtonTracking {
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -59,7 +60,8 @@
     max-height: 40px;
 }
 
-.manageTasksButtonTracking:hover {
+.manageTasksButtonTracking:hover,
+.actualHoursButtonTracking:hover {
     background-color: #09043d; 
 }
 
@@ -89,7 +91,8 @@
         flex-direction: column;
     }
     
-    .manageTasksButtonTracking {
+    .manageTasksButtonTracking,
+    .actualHoursButtonTracking {
         padding: 10px;
         border: none;
         border-radius: 5px;

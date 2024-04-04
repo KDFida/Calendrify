@@ -5,6 +5,7 @@ import firebase from "../../firebase/firebase";
 import { getDocs, collection, query, where, doc, deleteDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import ManageTasksDialog from "../components/manage-task/ManageTasksDialog";
+import ActualHoursDialog from "../components/actual-hours/ActualHoursDialog";
 
 function changeStatus(status) {
     if (status === "notStarted") {
@@ -15,13 +16,15 @@ function changeStatus(status) {
         return "due today"
     }
 }
-
+ 
 function TaskTracking() {
     const [inProgressTasks, setInProgressTasks] = useState([]);
     const [notStartedTasks, setNotStartedTasks] = useState([]);
     const [todayTasks, setTodayTasks] = useState([]);
     const [tasks, setTasks] = useState([]);
+    const [Filteredtasks, setFilteredTasks] = useState([]);
     const [isManageDialogOpen, setManageDialogOpen] = useState(false);
+    const [isActualHoursDialogOpen, setIsActualHoursDialogOpen] = useState(false);
 
     const handleManageTasks = () => {
         setManageDialogOpen(true);
@@ -29,6 +32,14 @@ function TaskTracking() {
     
     const handleCloseManageDialog = () => {
         setManageDialogOpen(false);
+    };
+
+    const handleOpenActualHoursChange = () => {
+        setIsActualHoursDialogOpen(true);
+    };
+    
+    const handleCloseActualHoursChange = () => {
+        setIsActualHoursDialogOpen(false);
     };
     
     const handleDeleteTask = async (taskId) => {
@@ -48,16 +59,17 @@ function TaskTracking() {
 
     useEffect(() => {
         const unsubscribe = firebase.authentication.onAuthStateChanged(user => {
-          if (user) {
-            fetchTasks(user.uid); 
-          } else {
-            toast.info("Please log in to see the tasks");
-            setInProgressTasks([]);
-            setNotStartedTasks([]);
-            setTodayTasks([]); 
-            setTasks([]);
-          }
+            if (user) {
+                fetchTasks(user.uid); 
+            } else {
+                toast.info("Please log in to see the tasks");
+                setInProgressTasks([]);
+                setNotStartedTasks([]);
+                setTodayTasks([]); 
+                setTasks([]);
+            }
         });
+    
         return () => unsubscribe();
     }, []);
 
@@ -71,14 +83,22 @@ function TaskTracking() {
                 title: doc.data().name,
                 start: doc.data().deadline,
                 ...doc.data()
-            })).filter(task => task.status !== 'finished' && task.deadline >= today);
+            }));
             const inProgress = tasksArray.filter(task => task.status === 'inProgress');
             const notStarted = tasksArray.filter(task => task.status === 'notStarted');
             const dueToday = tasksArray.filter(task => task.deadline === today);
+            const tasksNeedingActualHours = tasksArray.filter(task => 
+                (task.status === 'finished' || task.deadline < today) && (task.actualHours === null || task.actualHours === '')
+            );
+            if (tasksNeedingActualHours.length > 0) {
+                setFilteredTasks(tasksNeedingActualHours);
+            } else {
+                setFilteredTasks([]);
+            }
             if (tasksArray.length === 0) {
                 setTasks([]);
             } else {
-                setTasks(tasksArray);
+                setTasks(tasksArray.filter(task => task.status !== 'finished' && task.deadline >= today));
                 setInProgressTasks(inProgress);
                 setNotStartedTasks(notStarted);
                 setTodayTasks(dueToday);
@@ -108,6 +128,9 @@ function TaskTracking() {
             <div className="titleAndButton">
                 <h1 className="taskTracking-title">Task Tracking</h1>
             <div className="buttons">
+                <button className="actualHoursButtonTracking" onClick={handleOpenActualHoursChange}>
+                    Actual Hours
+                </button>
                 <button className="manageTasksButtonTracking" onClick={handleManageTasks}>
                     Manage Tasks
                 </button>
@@ -135,6 +158,12 @@ function TaskTracking() {
                     onClose={handleCloseManageDialog}
                     tasks={tasks}
                     onDelete={handleDeleteTask}
+            />
+
+            <ActualHoursDialog
+                open={isActualHoursDialogOpen}
+                onClose={handleCloseActualHoursChange}
+                tasks={Filteredtasks}
             />
         </div>
     )
