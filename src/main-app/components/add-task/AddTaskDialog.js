@@ -12,6 +12,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import axios from 'axios';
 
 function AddTaskDialog({ open, onClose }) {
   const [taskName, setTaskName] = useState('');
@@ -55,6 +56,28 @@ function AddTaskDialog({ open, onClose }) {
     onClose(); 
   };
 
+  const handleGetRecommendedHours = async () => {
+      if (!estimatedHours || !taskPriority) {
+          toast.error("Please enter estimated hours and select a priority to get recommendations.");
+          return;
+      }
+      
+      try {
+          const response = await axios.post('https://morning-meadow-80151.herokuapp.com/predict', {
+              estimatedHours: parseFloat(estimatedHours),
+              priority: taskPriority
+          });
+          
+          if (response.data) {
+              alert(`Based on similar tasks, we recommend setting the actual hours to ${response.data.predictedHours}.`);
+          } else {
+              toast.error("Failed to get recommendations. Please try again.");
+          }
+      } catch (error) {
+          toast.error("Error fetching recommended hours. Please check your network and try again.");
+      }
+  };  
+
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Add New Task</DialogTitle>
@@ -97,7 +120,6 @@ function AddTaskDialog({ open, onClose }) {
             </Select>
         </FormControl>
 
-
         <TextField
           margin="dense"
           label="Deadline"
@@ -126,6 +148,13 @@ function AddTaskDialog({ open, onClose }) {
             step: 0.5
           }}
         />
+        <Button
+          onClick={handleGetRecommendedHours}
+          color="primary"
+          style={{ marginTop: 8 }}
+        >
+          Get Recommended Hours
+        </Button>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
