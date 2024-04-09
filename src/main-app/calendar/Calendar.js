@@ -108,7 +108,7 @@ function Calendar() {
         const unsubscribe = firebase.authentication.onAuthStateChanged(user => {
           if (user) {
             fetchTasks(user.uid); 
-            //fetchAvailability(user.uid);
+            fetchAvailability(user.uid);
             fetchSchedule(user.uid);
           } else {
             toast.info("Please log in to see the page");

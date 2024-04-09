@@ -64,7 +64,7 @@ function AddTaskDialog({ open, onClose }) {
       
       try {
           const response = await axios.post('http://localhost:5000/predict', {
-              estimatedHours: parseFloat(estimatedHours),
+              estimatedHours: parseInt(estimatedHours),
               priority: taskPriority
           });
           
