@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 from joblib import load
+from flask_cors import CORS
 
 app = Flask(__name__)
-model = load('prediction_model.joblib')  
+CORS(app)
+model = load('C:\\Users\\Fidak\\OneDrive\\Desktop\\Uni\\Year 3\\COMP390\\calendrify\\prediction_model.joblib')  
 
 @app.route('/predict', methods=['POST'])
 def predict():

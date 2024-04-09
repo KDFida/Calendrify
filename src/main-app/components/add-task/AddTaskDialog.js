@@ -63,7 +63,7 @@ function AddTaskDialog({ open, onClose }) {
       }
       
       try {
-          const response = await axios.post('https://morning-meadow-80151.herokuapp.com/predict', {
+          const response = await axios.post('http://localhost:5000/predict', {
               estimatedHours: parseFloat(estimatedHours),
               priority: taskPriority
           });
