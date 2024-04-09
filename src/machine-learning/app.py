@@ -4,7 +4,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
-model = load('C:\\Users\\Fidak\\OneDrive\\Desktop\\Uni\\Year 3\\COMP390\\calendrify\\prediction_model.joblib')  
+model = load('prediction_model.joblib')  
 
 @app.route('/predict', methods=['POST'])
 def predict():

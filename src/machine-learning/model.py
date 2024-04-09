@@ -7,7 +7,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from joblib import dump
 
-cred = credentials.Certificate('C:\\Users\\Fidak\\OneDrive\\Desktop\\Uni\\Year 3\\COMP390\\calendrify\\calendrify-589da-firebase-adminsdk-b0jd4-fcdd62c94b.json')
+cred = credentials.Certificate('calendrify-589da-firebase-adminsdk-b0jd4-fcdd62c94b.json')
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
@@ -48,4 +48,4 @@ r2 = r2_score(y_test, y_pred)
 print(f"Mean Squared Error: {mse}")
 print(f"R^2 Score: {r2}")
 
-dump(model, 'C:\\Users\\Fidak\\OneDrive\\Desktop\\Uni\\Year 3\\COMP390\\calendrify\\prediction_model.joblib')
+dump(model, 'prediction_model.joblib')
